@@ -1,9 +1,9 @@
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database:'ventas'
+  host     : 'SQL5101.site4now.net',
+  user     : 'DB_A6E49F_videogamecity_admin',
+  password : 'kaka2020',
+  database:'DB_A6E49F_videogamecity'
 });
 
 connection.connect(
