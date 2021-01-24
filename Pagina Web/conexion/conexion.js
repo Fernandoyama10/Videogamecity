@@ -1,10 +1,6 @@
 
 var mysql      = require('mysql');
-<<<<<<< Updated upstream
-var connection = mysql.createConnection({
-=======
 var connection = mysql.createPool({
->>>>>>> Stashed changes
   host     : 'MYSQL5044.site4now.net',
   user     : 'a6e49f_citygam',
   password : 'kaka2020',
