@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
         console.log(resultados);  
 
         res.render('productos', { title: 'Nuestros Productos Nuevos', Libros:resultados }); 
-
+         
         });
 
   });
