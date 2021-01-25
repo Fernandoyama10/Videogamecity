@@ -24,7 +24,8 @@ body {
   margin-inline: 70px;
 }
 .imagen-lista {
-  height: auto;
+  height: 280px;
+  width: 245px;
 }
 .sombra-caja-lista {
   -webkit-box-shadow: 0px 0px 29px -12px rgba(0,0,0,1);
