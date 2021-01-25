@@ -41,6 +41,22 @@
 
 
      
+<div class="container">
+
+  <br>
+
+  
+
+  <div class="row">
+  <div class="col col-sm-4 ">    <a class="btn btn-success btn-block" href="#">Recomendar Nuevo Videojuego</a></div>
+
+  <div class="col col-sm-4 ">      <a href="#"><img class="card-img-top imagen-lista" src="https://cdn.discordapp.com/attachments/756363152865624124/803374432038813696/vinilos-infantiles-super-mario-bros.png" alt=""></a></div>
+
+
+  </div>
+
+  <br>
+  <div class="linea-separadora"></div>
   
     <!-- Page Content -->
     <div class="container">
@@ -48,75 +64,28 @@
         <div class="col offset-lg-3">
  <h1 class="my-4 bienvenida-text">RANKING RECOMENDADOS
         </div>
+        
       </div>
       <!-- Marketing Icons Section -->
       <div class="row">
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project One</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+
+
+        <% for(var videojuego=0; videojuego<Videojuegos.length; videojuego++) { %>
+
+          <div class="col-sm-3 portfolio-item ">
+            <div class="card h-100 sombra-caja-lista">
+              <a href="#"><img class="card-img-top imagen-lista" src="<%=Videojuegos[videojuego].imagen%>" alt=""></a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="#"><%=Videojuegos[videojuego].titulo%></a>
+                </h4>
+                <p class="card-text"><%=Videojuegos[videojuego].descripcion%>...</p>
+                <a href="#" class="btn btn-primary">Ver</a>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Two</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Three</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Four</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Five</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Six</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
-            </div>
-          </div>
-        </div>
+
+          <% } %>         
       </div>
       <!-- /.row -->
   
