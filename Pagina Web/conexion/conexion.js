@@ -1,10 +1,10 @@
 
 var mysql      = require('mysql');
 var connection = mysql.createPool({
-  host     : 'localhost',
-  user     : 'root',
-  password : '12345',
-  database:'videogames'
+  host     : 'MYSQL5044.site4now.net',
+  user     : 'a6e49f_citygam',
+  password : 'kaka2020',
+  database:'db_a6e49f_citygam'
 });
 
 connection.getConnection((err, conn) =>{
