@@ -21,7 +21,7 @@ connectionn.getConnection((err,connection) => {
   }
   if (connection) {
       connection.release();
-      console.log('Base de datos !');
+      console.log('Base de datos conectada !');
       return;
   }
 });

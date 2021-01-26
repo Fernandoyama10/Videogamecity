@@ -2,17 +2,24 @@ var express = require('express');
 var router = express.Router();
 //importamos la conexión
 var bd = require("../conexion/conexion");
+const authController = require('../controllers/usuarios');
 
-/* GET seccion.(productos.ejs) */
-router.get('/', function(req, res, next) {
-  //hacemos el select con la variable importada de conexión 
-    bd.query("SELECT * FROM tbl_videojuegos", function(err,resultados){
-        console.log(resultados);  
 
-        res.render('login', { title: 'Nuestros Productos Nuevos', Libros:resultados }); 
-         
-        });
+/* GET seccion.(productos.ejs)  */
+router.get('/',  authController.isLoggedIn, function(req, res, next) {
+
+  console.log(req.user);
+  if(!req.user) {
+    res.render('login', { title: 'Nuestros Productos Nuevos', user: req.user });
+  } else if (req.user) {
+    res.redirect('/');
+  }
+ 
 
   });
 
-module.exports = router;
+
+
+
+  module.exports = router;
+
