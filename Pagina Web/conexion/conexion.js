@@ -1,30 +1,32 @@
-
 var mysql      = require('mysql');
-var connection = mysql.createPool({
-  host     : 'MYSQL5044.site4now.net',
-  user     : 'a6e49f_citygam',
-  password : 'kaka2020',
-  database:'db_a6e49f_citygam'
+var connectionn = mysql.createPool({
+    port   : '19120',
+  host     : 'mysql-19120-0.cloudclusters.net',
+  user     : 'Brandon',
+  password : '12345678',
+  database:'videogames'
 });
 
-connection.getConnection((err, conn) =>{
+connectionn.getConnection((err,connection) => {
   if (err) {
-      if (err.code == 'PROTOCOL_CONNECTION_LOST'){
-          console.error('LA CONEXIONES DE LA BASE DE DATOS FUE CERRADA');
+      if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+          console.error('Database connection failed !');
       }
-     if(err.code == 'ER_CON_COUNT_ERROR') {
-          console.error('LA BASE DE DATOS TIENE MUCHAS CONEXIONES');
-     }
-     if (err.code == 'ECONNREFUSED') {
-         console.error('LA CONEXIONES DE LA BASE DE DATOS FUE RECHAZADA');
-     }
+      if (err.code === 'ER_CON_COUNT_ERROR') {
+          console.error('Database has too many connections !');
+      }
+      if (err.code === 'ECONNREFUSED') {
+          console.error('Database connection was refused !');
+      }
   }
-  if (conn) conn.release();
-  console.log('BD is Connected');
-  return;
+  if (connection) {
+      connection.release();
+      console.log('Base de datos !');
+      return;
+  }
 });
 
-module.exports=connection;
+module.exports = connectionn;
 
 /*connection.query("SELECT * FROM tblproductos", function(err,resultados){
 console.log(resultados);
