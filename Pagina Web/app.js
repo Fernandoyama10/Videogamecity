@@ -3,13 +3,25 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mysql = require('mysql');
+var flash = require('express-flash');
+
+var session = require('express-session');
+
+const dotenv = require('dotenv');
+
+
+dotenv.config({ path: './.env'}); 
+
+
 //separamos en partes por buenas practicas las secciones
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var productosRouter = require('./routes/productos');
 var nosotrosRouter = require('./routes/nosotros');
 var loginRouter = require('./routes/login');
 var registroRouter = require('./routes/registro');
+var recomendarRouter = require('./routes/recomendar');
+var AuthRouter = require('./routes/auth');
 var app = express();
 
 // view engine setup
@@ -21,16 +33,30 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+
 //llamamos la variables para redireccionarlo
+
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/productos', productosRouter);
 app.use('/nosotros', nosotrosRouter);
 app.use('/login', loginRouter);
 app.use('/registro', registroRouter);
+app.use('/recomendar', recomendarRouter);
+app.use('/auth', AuthRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
+});
+app.use(function(req, res){
+  res.status(404).render("es/not-found.ejs", { title: "No encontrado" });
+});
+
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.status(404).render('error', { error: err });
 });
 
 // error handler
