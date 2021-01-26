@@ -45,8 +45,8 @@
   <br>
   <div class="row">
     <div class="col col-sm-2"></div>
-  <div class="col col-sm-2"><a href="#"><img style=" padding-left: 20px; height: 180px; width: 170px;" class="card-img-top imagen-lista" src="https://cdn.discordapp.com/attachments/756363152865624124/803420969108504606/design-b019565b-3766-4e3b-8520-d4a282ccc177.png" alt=""></a></div>
-  <div class="col col-sm-4" style="padding-left: 80px; padding-top:20px;"><a class="btn btn-success btn-block" style="text-align: center;"  href="#"><H6>RECOMIENDA TU VIDEO JUEGO</H6></a></div>
+  <div class="col col-sm-2"><a href="#"><img style=" padding-left: 33px; height: 178px; width: 160px;" class="card-img-top imagen-lista" src="https://cdn.discordapp.com/attachments/756363152865624124/803420969108504606/design-b019565b-3766-4e3b-8520-d4a282ccc177.png" alt=""></a></div>
+  <div class="col col-sm-4" style="padding-left: 60px; padding-top:20px;"><a class="btn btn-success btn-block" style="text-align: center;"  href="#"><H6>RECOMIENDA TU VIDEO JUEGO</H6></a></div>
   <div class="col col-sm-2"><a href="#"><img style="padding-right: 20px; height: 180px; width: 180px;" class="card-img-top imagen-lista" src="https://cdn.discordapp.com/attachments/756363152865624124/803374432038813696/vinilos-infantiles-super-mario-bros.png" alt=""></a></div>
   <div class="col col-sm-2"></div>
   </div>
@@ -68,7 +68,7 @@
                                                     
         <% for(var videojuego=0;videojuego<Videojuegos.length;videojuego++) { %>
 
-          <div class="col-sm-3 portfolio-item ">
+            <div class="col-sm-3 portfolio-item ">
             <div class="card h-100 sombra-caja-lista">
               <a href="#"><img class="card-img-top imagen-lista" src="<%=Videojuegos[videojuego].imagen%>" alt=""></a>
               <div class="card-body">
@@ -78,16 +78,54 @@
                 <p class="card-text"><%=Videojuegos[videojuego].descripcion%>...</p>
 
                 <p class="card-text">Votos: <%=Videojuegos[videojuego].votos%></p>
-                <a href="#" class="btn btn-primary">Ver</a>
+
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal<%=Videojuegos[videojuego].id_videojuego%>">
+                  Ver
+                </button>
+          
+   
+
               </div>
             </div>
           </div>
 
           <% } %>
       </div>
+     
+      <!-- /.row -->
+
+      <div class="row">
+
+                                                    
+        <% for(var videojuego=0;videojuego<Videojuegos.length;videojuego++) { %>
+
+                       <!-- Modal -->
+                       <div class="modal fade" id="<%=Videojuegos[videojuego].id_videojuego%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel"><%=Videojuegos[videojuego].titulo%></h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              ...
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>      
+
+          <% } %>
+      </div>
+
 
       <!-- /.row -->
-  
   
       <!-- Features Section -->
       <div class="row">
@@ -110,7 +148,7 @@
         </div>
       </div>
       <!-- /.row -->
-  
+
       <hr>
   
       <!-- Call to Action Section -->
@@ -124,6 +162,7 @@
       </div>
   
     </div>
+
   </header>
   
 <%- include layouts/footer.ejs %>
