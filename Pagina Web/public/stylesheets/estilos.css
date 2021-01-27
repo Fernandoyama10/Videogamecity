@@ -127,6 +127,24 @@ body {
 .typeahead:focus {
   border: 2px solid #0097CF;
 }
+
+.titulo, .tt-query, .tt-hint {
+  border: 2px solid #CCCCCC;
+  border-radius: 8px;
+  font-size: 18px;
+  height: 45px;
+  line-height: 30px;
+  outline: medium none;
+  padding: 8px 12px;
+  width: 250px;
+}
+.titulo {
+  background-color: #FFFFFF;
+}
+.titulo:focus {
+  border: 2px solid #0097CF;
+}
+
 .tt-query {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
 }
