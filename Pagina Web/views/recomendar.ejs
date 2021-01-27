@@ -22,8 +22,8 @@
                                           </button>
                                     </div>
                                 <% } %>
-                                <% if(typeof messagesuccess!= "undefined" && messagesuccess) { %>
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert"><strong><%= messagesuccess %></strong>&nbsp;&nbsp;
+                                <% if(typeof messagessucces!= "undefined" && messagessucces) { %>
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert"><strong><%= messagessucces %></strong>&nbsp;&nbsp;
                                         <a class="btn btn-info" href="/">Ir al Ranking</a>
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
@@ -36,11 +36,11 @@
                                  
                                         <div class="form-group">
                                             <label for="exampleInputEmail2"></label>
-                                            <input type="name" class="form-control form-control-sm" placeholder="Ingresa el titulo" name="titulo"  autocomplete="off">
+                                            <input type="name" class="form-control form-control-sm" placeholder="Ingresa el titulo" name="titulo"  autocomplete="off" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail2"></label>
-                                            <input type="name" class="form-control form-control-sm" placeholder="Ingresa la descripción" name="descripcion"  autocomplete="off">
+                                            <input type="name" class="form-control form-control-sm" style="height: 60px;" placeholder="Ingresa la descripción max.90 palabaras" maxlength="90" name="descripcion"  autocomplete="off" required>
                                         </div>
                                     <br>
                                     <br>

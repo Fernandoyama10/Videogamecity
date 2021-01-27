@@ -9,7 +9,7 @@ const authController = require('../controllers/usuarios');
 router.get('/',  authController.isLoggedIn, function(req, res, next) {
 
   if(!req.user) {
-    res.redirect('/');
+    res.redirect('/login');
   } else if (req.user) {
     res.render('recomendar', { title: 'Recomienda un Videojuego', user: req.user });
   }
