@@ -43,21 +43,31 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
        
-
-
           <li class="nav-item">
             <a class="nav-link" href="/">Inicio</a>
           </li>
-          <li class="nav-item">
+            <li class="nav-item">
             <a class="nav-link" href="#rankings">Ranking</a>
           </li>
-    
+          <% if(user){ %>
+            <li class="nav-item">
+              <a class="nav-link bienvenida-text" >Bienvenido - <%= user.nombre %>..</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+
+          <% } else{ %>  
+  
             <li class="nav-item">
               <a class="nav-link" href="../login">Iniciar Sesión</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="../registro">Registrarse</a>
             </li>
+         
+         <% } %>
          
   
      

@@ -46,7 +46,18 @@
   <div class="row">
     <div class="col col-sm-2"></div>
   <div class="col col-sm-2"><a href="#"><img style=" padding-left: 40px; height: 178px; width: 170px;" class="card-img-top imagen-lista" src="https://cdn.discordapp.com/attachments/756363152865624124/803420969108504606/design-b019565b-3766-4e3b-8520-d4a282ccc177.png" alt=""></a></div>
-  <div class="col col-sm-4" style="padding-left: 80px; padding-top:20px;"><a class="btn btn-success btn-block" style="text-align: center;"  href="../recomendar"><H6>RECOMIENDA TU VIDEO JUEGO <i class="fas fa-plus-circle"></i></H6></a></div>
+
+  <% if(user){ %>
+    <div class="col col-sm-4" style="padding-left: 80px; padding-top:20px;"><a class="btn btn-success btn-block" style="text-align: center;"  href="../recomendar"><H6>RECOMIENDA TU VIDEO JUEGO <i class="fas fa-plus-circle"></i></H6></a></div>
+
+  <% } else{ %>  
+
+  
+ <% } %>
+
+  
+ 
+ 
   <div class="col col-sm-2"><a href="#"><img style="padding-right: 20px; height: 180px; width: 180px;" class="card-img-top imagen-lista" src="https://cdn.discordapp.com/attachments/756363152865624124/803374432038813696/vinilos-infantiles-super-mario-bros.png" alt=""></a></div>
   <div class="col col-sm-2"></div>
   </div>

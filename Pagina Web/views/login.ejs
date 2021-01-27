@@ -28,22 +28,23 @@
                                 <form action="/auth/login" method="POST">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1"></label>
-                                        <input type="email" class="form-control form-control-sm" placeholder="Ingresa tu correo" name="correo" >
+                                        <input type="email" class="form-control form-control-sm" placeholder="Ingresa tu correo" id="correo" name="correo" maxlength = "100" required >
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1"></label>
                                        
-                                        <input type="password" class="form-control form-control-sm" placeholder="Contraseña" name="contrasena">
+                                        <input type="password" class="form-control form-control-sm" placeholder="Contraseña" id=contrasena"" minlength="5" maxlength = "40" name="contrasena" required >
                                     </div>
                                     <br>
                                     <br>
                                     <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                </form>
                                     <br>
                                     <br>
                                     <div class="sign-up">
                                         ¿No tienes cuenta? <a href="/registro">Registrate</a>
                                     </div>
-                                </form>
+                           
 
                             
                             </div>
