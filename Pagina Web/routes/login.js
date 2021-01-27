@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 //importamos la conexión
-var bd = require("../conexion/conexion");
 const authController = require('../controllers/usuarios');
 
 

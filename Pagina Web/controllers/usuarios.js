@@ -52,6 +52,49 @@ exports.login = async (req, res) => {
         }
   
 }
+exports.search = async (req, res) => {
+    
+  try {
+      const { typeahead }= req.body;
+
+      if( !typeahead ){
+        return res.status(400).render('videojuegos', {
+          message : 'Por favor proporciona una contraseña o correo'
+        })
+      }
+
+      bd.query("SELECT * from tbl_videojuegos where titulo like '%" + [typeahead] + "%' ", async (error,lista) =>{
+        console.log("JUEGOSELECCIONADO ES");
+        console.log(lista);
+        res.status(200).redirect("/videojuegos");
+        req.listgames = lista[0];
+        if( !lista ) {
+          res.status(401).render('videojuegos', {
+            message: 'No se encontraron videojuegos relacionados'
+          });
+        } else {
+         
+
+          if(!result) {
+            return next();
+          }
+  
+         
+       
+
+
+        
+        }
+
+      })
+      
+      
+
+      } catch (error) {
+        console.log(error);
+      }
+
+}
 
 
 exports.registro = (req, res) => {

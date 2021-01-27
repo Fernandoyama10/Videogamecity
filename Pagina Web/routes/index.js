@@ -16,7 +16,7 @@ router.get('/', authController.isLoggedIn, function(req, res, next) {
 
   });
 
-  router.get('/search',function(req,res){
+  router.get('/searchtool',function(req,res){
     bd.query('SELECT titulo from tbl_videojuegos where titulo like "%'+req.query.key+'%"', function(err, rows, fields) {
         if (err) throw err;
         var data=[];

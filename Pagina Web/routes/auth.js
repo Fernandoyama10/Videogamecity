@@ -9,4 +9,6 @@ router.post('/login', authController.login );
 
 router.post('/recomendado', authController.guardar );
 
+router.post('/search', authController.search );
+
 module.exports = router;

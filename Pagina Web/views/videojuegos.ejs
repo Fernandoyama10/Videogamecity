@@ -1,0 +1,64 @@
+<%- include layouts/header_regis.ejs %>
+<header>
+     
+<div class="container">
+  <hr>
+  <br>
+  <div class="row">
+    <div class="col col-sm-2"></div>
+  <div class="col col-sm-2"><a href="#"><img style=" padding-left: 20px; height: 180px; width: 170px;" class="card-img-top imagen-lista" src="https://cdn.discordapp.com/attachments/756363152865624124/803420969108504606/design-b019565b-3766-4e3b-8520-d4a282ccc177.png" alt=""></a></div>
+  <div class="col col-sm-4" style="padding-left: 80px; padding-top:20px;"><a class="btn btn-success btn-block" style="text-align: center;"  href="../recomendar"><H6>RECOMIENDA TU VIDEO JUEGO <i class="fas fa-plus-circle"></i></H6></a></div>
+  <div class="col col-sm-2"><a href="#"><img style="padding-right: 20px; height: 180px; width: 180px;" class="card-img-top imagen-lista" src="https://cdn.discordapp.com/attachments/756363152865624124/803374432038813696/vinilos-infantiles-super-mario-bros.png" alt=""></a></div>
+  <div class="col col-sm-2"></div>
+  </div>
+
+  <br>
+  <div class="linea-separadora"></div>
+  
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col offset-lg-3">
+ <h1 id="rankings" class="my-4 bienvenida-text">Videojuego(s) encontrado(s): 
+        </div>
+        
+      </div>
+      <!-- Marketing Icons Section -->
+      <div class="row">
+
+                                                    
+        <% for(var videojuego=0;videojuego<Videojuegos.length;videojuego++) { %>
+
+          <div class="col-sm-3 portfolio-item ">
+            <div class="card h-100 sombra-caja-lista">
+              <a href="#"><img class="card-img-top imagen-lista" src="<%=Videojuegos[videojuego].imagen%>" alt=""></a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="#"><%=Videojuegos[videojuego].titulo%></a>
+                </h4>
+                <p class="card-text"><%=Videojuegos[videojuego].descripcion%>...</p>
+
+                <p class="card-text">Votos: <%=Videojuegos[videojuego].votos%></p>
+                <a href="#" class="btn btn-primary">Ver</a>
+              </div>
+            </div>
+          </div>
+
+          <% } %>
+      </div>
+
+      <!-- /.row -->
+  
+  
+      <!-- Features Section -->
+  
+  
+      <hr>
+  
+      <!-- Call to Action Section -->
+
+  
+    </div>
+  </header>
+  
+<%- include layouts/footer.ejs %>
