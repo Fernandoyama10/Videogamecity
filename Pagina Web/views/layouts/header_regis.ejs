@@ -10,7 +10,20 @@
   <link rel="stylesheet" href="/stylesheets/estilos.css">
   <script src="/scripts/jquery.min.js"></script>
   <script src="/scripts/bootstrap.bundle.min.js"></script>
+  <script  type="text/javascript" src="/scripts/typeahead.min.js"></script>
   <script src="https://kit.fontawesome.com/581287c489.js" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $('input.typeahead').typeahead({
+            name: 'countries',
+            remote: 'http://localhost:3000/searchtool?key=%QUERY',
+            limit: 10,
+        
+        });
+      
+    });
+    </script>
+
 </head>
 
 <body>
@@ -21,12 +34,12 @@
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
-      <div class="input-group buscador-css">
-        <input type="search" class="form-control rounded" placeholder="Buscar Videojuego" aria-label="Search"
-          aria-describedby="search-addon" />
-        <button type="button" class="btn  btn-primary">Buscar</button>
-      </div>
+      <form action="/videojuegos" method="POST">
+        <div class="input-group2 buscador-css">
+          <input type="text" ID="typeahead" name="typeahead" class="typeahead tt-query" autocomplete="off" placeholder="Buscar Videojuego..">
+          <button type="submit" class="btn  btn-primary" value="Add">Buscar</button>
+        </div>
+      </form>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
        

@@ -18,12 +18,16 @@
                                     <div class="alert alert-danger alert-dismissible fade show" role="alert"><%= message %></div>
 
                                 <% } %>
+
+                                <% if(typeof messagesuccess!= "undefined" && messagesuccess) { %>
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert"><%= messagesuccess %></div>
+
+                                <% } %>
                                 <div class="form-s">
                                     <!-- to error: add class "has-danger" -->
                                     <form action="/auth/registro" method="POST">
                                  
-
-                                        <div class="form-group">
+                                         <div class="form-group">
                                             <label for="exampleInputEmail2"></label>
                                             <input type="name" class="form-control form-control-sm" placeholder="Ingresa tu nombre" name="nombre"  autocomplete="off">
                                         </div>
@@ -50,6 +54,7 @@
                                     <br>
                                     <br>
                                     <button type="submit" class="btn btn-primary btn-block" value="Add">Registrarse</button>
+                                    
                                 </form>
                                     <br>
                                     <br>
