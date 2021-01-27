@@ -51,7 +51,7 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 app.use(function(req, res){
-  res.status(404).render("es/not-found.ejs", { title: "No encontrado" });
+  res.status(404).render("error", { title: "No encontrado" });
 });
 
 app.use(function(err, req, res, next) {

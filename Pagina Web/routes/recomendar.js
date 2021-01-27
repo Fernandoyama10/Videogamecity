@@ -8,7 +8,12 @@ const authController = require('../controllers/usuarios');
 /* GET seccion.(productos.ejs)  */
 router.get('/',  authController.isLoggedIn, function(req, res, next) {
 
+
+  if(!req.user) {
+    res.redirect('/');
+  } else if (req.user) {
     res.render('recomendar', { title: 'Recomienda un Videojuego', user: req.user });
+  }
 
   });
 

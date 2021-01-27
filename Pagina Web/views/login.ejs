@@ -1,4 +1,4 @@
-<%- include layouts/header.ejs %>
+<%- include layouts/header_regis.ejs %>
 <header>
 <div class="banner">
     <div class="">
@@ -16,6 +16,10 @@
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->
                             <% if(typeof message!= "undefined" && message) { %>
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert"><%= message %></div>
+
+                            <% } %>
+                            <% if(typeof messageregister!= "undefined" && messageregister) { %>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert"><%= messageregister %></div>
 
                             <% } %>
                             <div class="form-s">

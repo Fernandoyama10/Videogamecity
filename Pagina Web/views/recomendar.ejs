@@ -1,4 +1,4 @@
-<%- include layouts/header.ejs %>
+<%- include layouts/header_regis.ejs %>
 <header>
     <div class="banner">
    
@@ -20,41 +20,24 @@
                                 <% } %>
                                 <div class="form-s">
                                     <!-- to error: add class "has-danger" -->
-                                    <form action="/auth/registro" method="POST">
+                                    <form action="/auth/recomendado" method="POST">
                                  
-
                                         <div class="form-group">
                                             <label for="exampleInputEmail2"></label>
-                                            <input type="name" class="form-control form-control-sm" placeholder="Ingresa tu nombre" name="nombre"  autocomplete="off">
+                                            <input type="name" class="form-control form-control-sm" placeholder="Ingresa el titulo" name="titulo"  autocomplete="off">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail2"></label>
-                                            <input type="name" class="form-control form-control-sm" placeholder="Ingresa tu apellido" name="apellido"  autocomplete="off">
+                                            <input type="name" class="form-control form-control-sm" placeholder="Ingresa la descripción" name="descripcion"  autocomplete="off">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1"></label>
-                                            <input type="email" class="form-control form-control-sm" placeholder="Ingresa tu correo" name="correo"  autocomplete="off">
-                                        </div>
-                
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1"></label>
-                                           
-                                            <input type="password" class="form-control form-control-sm" placeholder="Contraseña" name="contrasena"  autocomplete="off">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1"></label>
-                                           
-                                            <input type="password" class="form-control form-control-sm" placeholder="Repite tu contraseña" name="passwordConfirm" autocomplete="off">
-                                  
-                                    </div>
                                     <br>
                                     <br>
-                                    <button type="submit" class="btn btn-primary btn-block" value="Add">Registrarse</button>
+                                    <button type="submit" class="btn btn-primary btn-block" value="Add">Registrar</button>
                                 </form>
                                     <br>
                                     <br>
                                     <div class="sign-up">
-                                        ¿Tienes una cuenta? <a href="/login">Inicia Sesión</a>
+                                        ¿No tienes cuenta? <a href="/registro">Registrarme</a>
                                     </div>
                                 </div>
                             </div>

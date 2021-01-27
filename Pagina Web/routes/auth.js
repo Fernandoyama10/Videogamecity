@@ -7,6 +7,6 @@ router.post('/registro', authController.registro );
 
 router.post('/login', authController.login );
 
-
+router.post('/recomendado', authController.guardar );
 
 module.exports = router;
