@@ -7,6 +7,7 @@
   <meta name="author" content="">
   <title>VideoGamesCity</title>
   <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+  <link href="/imagenes/Star_coin.png" rel="icon">
   <link rel="stylesheet" href="/stylesheets/estilos.css">
   <script src="/scripts/jquery.min.js"></script>
   <script src="/scripts/bootstrap.bundle.min.js"></script>
@@ -47,16 +48,7 @@
             <li class="nav-item">
             <a class="nav-link" href="#rankings">Ranking</a>
           </li>
-          <% if(user){ %>
-            <li class="nav-item">
-              <a class="nav-link bienvenida-text" >Bienvenido - <%= user.nombre %>..</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="/logout">Logout</a>
-            </li>
-
-          <% } else{ %>  
+     
   
             <li class="nav-item">
               <a class="nav-link" href="../login">Iniciar Sesión</a>
@@ -65,7 +57,7 @@
               <a class="nav-link" href="../registro">Registrarse</a>
             </li>
          
-         <% } %>
+     
          
   
      

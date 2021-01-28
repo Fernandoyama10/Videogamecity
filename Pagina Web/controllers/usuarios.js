@@ -7,63 +7,65 @@ var bd = require("../conexion/conexion");
 
 exports.login = async (req, res) => {
     
-    try {
-        const { correo, contrasena } = req.body;
-  
-        if( !correo || !contrasena ){
-          return res.status(400).render('login', {
-            message : 'Por favor proporciona una contraseña o correo.'
-          })
-        }
-  
-        bd.query('SELECT * FROM usuario WHERE correo = ?', [correo], async (error, results) => {
-          if(error){
-            console.log(error);
-        }
+  try {
+    const { correo, contrasena } = req.body;
+    console.log(req.body);
+    if( !correo || !contrasena ){
+      return res.status(400).render('login', {
+        message : 'Por favor proporciona una contraseña o correo.'
+      })
+    }
 
-        if(results.length > 0) {
-          
-          if( !results[0].correo || !(await bcrypt.compare(contrasena, results[0].contrasena)) ) {
-            res.status(401).render('login', {
-              message: 'Correo o contraseña invalido.'
-            })
-          } else {
+    bd.query('SELECT * FROM usuario WHERE correo = ?', [correo], async (error, results) => {
 
-            
-            const id = results[0].id_usuario;
-    
-            const token = jwt.sign({ id }, process.env.JWT_SECRET, {
-              expiresIn: process.env.JWT_EXPIRES_IN
-            });
-    
-            console.log("The token is: " + token);
-    
-            const cookieOptions = {
-              expires: new Date(
-                Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
-              ),
-              httpOnly: true
-            }
-    
-            res.cookie('jwt', token, cookieOptions );
-            res.status(200).redirect("/");
-          }
-        }else {
-            return res.render('login', {
-                message: 'Correo o contraseña invalido.'
-            });
-        }
 
-    
+
+      if(error){
+        console.log(error);
+    }
+
+    if(results.length > 0) {
+      
+      if( !results[0].correo || !(await bcrypt.compare(contrasena, results[0].contrasena)) ) {
+        res.status(401).render('login', {
+          message: 'Correo o contraseña invalido.'
         })
-    
+      } else {
+
         
-        
-  
-        } catch (error) {
-          console.log(error);
+        const id = results[0].id_usuario;
+
+        const token = jwt.sign({ id }, process.env.JWT_SECRET, {
+          expiresIn: process.env.JWT_EXPIRES_IN
+        });
+
+        console.log("The token is: " + token);
+
+        const cookieOptions = {
+          expires: new Date(
+            Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+          ),
+          httpOnly: true
         }
-  
+
+        res.cookie('jwt', token, cookieOptions );
+        res.status(200).redirect("/");
+      }
+    }else {
+        return res.render('login', {
+            message: 'Correo o contraseña invalido.'
+        });
+    }
+
+
+    })
+
+    
+    
+
+    } catch (error) {
+      console.log(error);
+    }
 }
 exports.search = async (req, res) => {
     
@@ -148,7 +150,7 @@ bd.query('INSERT INTO usuario set ?', {nombre : nombre,apellido : apellido, corr
     }); 
 }
 
-exports.guardar = async (req, res, next) => {
+exports.guardar =  async (req, res, next) => {
   // console.log(req.cookies);
   const {titulo, descripcion, votos='1', id_estatus='2'} = req.body;
   if( req.cookies.jwt) {
@@ -222,7 +224,104 @@ exports.guardar = async (req, res, next) => {
   }
 }
 
+
+exports.updatestatus = async  (req, res, next) => {
+  console.log(req.body);
+    const {titulo, descripcion, imagen, id_videojuego} = req.body;
+
+
+    bd.query("SELECT id_videojuego, titulo, SUBSTRING(descripcion, 1, 15) as descripcion, imagen, votos, estatus FROM tbl_videojuegos INNER JOIN estatus ON estatus.id_estatus = tbl_videojuegos.id_estatus ORDER BY tbl_videojuegos.id_estatus DESC", function(err,listjuegos){
+    
+      bd.query("SELECT id_videojuego, titulo, descripcion, imagen, votos, estatus FROM tbl_videojuegos INNER JOIN estatus ON estatus.id_estatus = tbl_videojuegos.id_estatus ORDER BY tbl_videojuegos.id_estatus DESC", function(err,listjuegos2){
+     
+        bd.query('UPDATE tbl_videojuegos SET titulo ="' + [titulo] +'", descripcion ="' + [descripcion] +'", imagen ="' + [imagen] +'" WHERE id_videojuego = ?', [id_videojuego],(error, results) => {
+          if(error){
+            console.log(error);
+            console.log("ERROR EL SQL EN LA SINTAXIS");
+        
+        }else {
+          console.log("ENTRA PARA ACTIVAR EL MENSAJE");
+            res.render('dashboard', { aviso: 'Juego actualizado', Videojuegos:listjuegos, Videojuegos2:listjuegos2});
+        
+        }
+        }); 
+  
+          });
+  
+      });
+
+
+
+    
+
+
+}
+
+
+exports.updateaprobar = async  (req, res, next) => {
+  console.log(req.body);
+    const {titulo, descripcion, imagen, id_estatus, id_videojuego} = req.body;
+
+
+    bd.query("SELECT id_videojuego, titulo, SUBSTRING(descripcion, 1, 15) as descripcion, imagen, votos, estatus FROM tbl_videojuegos INNER JOIN estatus ON estatus.id_estatus = tbl_videojuegos.id_estatus ORDER BY tbl_videojuegos.id_estatus DESC", function(err,listjuegos){
+    
+      bd.query("SELECT id_videojuego, titulo, descripcion, imagen, votos, estatus FROM tbl_videojuegos INNER JOIN estatus ON estatus.id_estatus = tbl_videojuegos.id_estatus ORDER BY tbl_videojuegos.id_estatus DESC", function(err,listjuegos2){
+     
+        bd.query('UPDATE tbl_videojuegos SET titulo ="' + [titulo] +'", descripcion ="' + [descripcion] +'", imagen ="' + [imagen] +'", id_estatus ="' + [id_estatus] +'" WHERE id_videojuego = ?', [id_videojuego],(error, results) => {
+          if(error){
+            console.log(error);
+            console.log("ERROR EL SQL EN LA SINTAXIS");
+        
+        }else {
+          console.log("ENTRA PARA ACTIVAR EL MENSAJE");
+            res.render('dashboard', { aviso: 'Juego Aprobado', Videojuegos:listjuegos, Videojuegos2:listjuegos2});
+        
+        }
+        }); 
+  
+          });
+  
+      });
+
+
+
+    
+
+
+}
 /* */
+
+exports.updaterechazar = async  (req, res, next) => {
+  console.log(req.body);
+    const {titulo, descripcion, imagen, id_estatus, id_videojuego} = req.body;
+
+
+    bd.query("SELECT id_videojuego, titulo, SUBSTRING(descripcion, 1, 15) as descripcion, imagen, votos, estatus FROM tbl_videojuegos INNER JOIN estatus ON estatus.id_estatus = tbl_videojuegos.id_estatus ORDER BY tbl_videojuegos.id_estatus DESC", function(err,listjuegos){
+    
+      bd.query("SELECT id_videojuego, titulo, descripcion, imagen, votos, estatus FROM tbl_videojuegos INNER JOIN estatus ON estatus.id_estatus = tbl_videojuegos.id_estatus ORDER BY tbl_videojuegos.id_estatus DESC", function(err,listjuegos2){
+     
+        bd.query('UPDATE tbl_videojuegos SET titulo ="' + [titulo] +'", descripcion ="' + [descripcion] +'", imagen ="' + [imagen] +'", id_estatus ="' + [id_estatus] +'" WHERE id_videojuego = ?', [id_videojuego],(error, results) => {
+          if(error){
+            console.log(error);
+            console.log("ERROR EL SQL EN LA SINTAXIS");
+        
+        }else {
+          console.log("ENTRA PARA ACTIVAR EL MENSAJE");
+            res.render('dashboard', { aviso: 'Juego Rechazado', Videojuegos:listjuegos, Videojuegos2:listjuegos2});
+        
+        }
+        }); 
+  
+          });
+  
+      });
+
+
+
+    
+
+
+}
 
 exports.isLoggedIn = async (req, res, next) => {
   // console.log(req.cookies);

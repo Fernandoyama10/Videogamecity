@@ -1,0 +1,251 @@
+<%- include layouts/header_dashboard.ejs %>
+
+       <!-- Container Fluid-->
+       <div class="container-fluid" id="container-wrapper">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">Inicio</h1>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Pagina Principal</a></li>
+            <li class="breadcrumb-item">Dashboard</li>
+ 
+          </ol>
+        </div>
+       
+        <!-- Row -->
+        <div class="row">
+          <!-- Datatables -->
+          <div class="col-lg-12">
+            <div class="card mb-4">
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Lista de Videojuegos</h6>
+              </div>
+              <% if(typeof aviso!= "undefined" && aviso) { %>
+                <div class="alert alert-success alert-dismissible fade show" role="alert"><%= aviso %></div>
+            <% } %>
+
+              <div class="table-responsive p-3">
+                <table class="table align-items-center table-flush" id="dataTable">
+                  <thead class="thead-light">
+                    <tr>
+                        <th>Editar</th>
+                        <th>Status</th>
+                        <th>Titulo</th>
+                        <th>Descripcion</th>
+                        <th>Url</th>
+                        <th>Votos</th>
+                        <th>ID</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                        <th>Editar</th>
+                        <th>Status</th>
+                        <th>Titulo</th>
+                        <th>Descripción</th>
+                        <th>Url</th>
+                        <th>Votos</th>
+                        <th>ID</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <% for(var videojuego=0;videojuego<Videojuegos.length;videojuego++) { %>
+          
+                        <tr>
+                            <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal<%=Videojuegos[videojuego].id_videojuego%>2">
+                                Aprobar
+                              </button><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal<%=Videojuegos[videojuego].id_videojuego%>3">
+                                Rechazar
+                              </button><br><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal<%=Videojuegos[videojuego].id_videojuego%>1">
+                                Actualizar
+                              </button></td>
+                            <td><%=Videojuegos[videojuego].estatus%></td>
+                            <td><%=Videojuegos[videojuego].titulo%></td>
+                            <td><%=Videojuegos[videojuego].descripcion%>..</td>
+                            <td> <a ><center><img class="imagen-lista" src="<%=Videojuegos[videojuego].imagen%>" alt=""></center></a></td>
+                            <td><%=Videojuegos[videojuego].votos%></td>
+                            <td><%=Videojuegos[videojuego].id_videojuego%></td>
+                          </tr>
+          
+                    <% } %>
+
+                    <% for(var videojuego2=0;videojuego2<Videojuegos2.length;videojuego2++) { %>
+          
+                        <div class="modal fade" id="modal<%=Videojuegos2[videojuego2].id_videojuego%>1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel"><%=Videojuegos2[videojuego2].titulo%></h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="submit_modal<%=Videojuegos2[videojuego2].id_videojuego%>1" action="/auth/updatestatus" method="POST">
+
+                                      <div class="form-group">
+                                        <label for="message-text" class="col-form-label">Titulo:</label>
+                                        <input type="hidden" value="1" form="submit_modal<%=Videojuegos2[videojuego2].id_videojuego%>1" />
+                                        <input type="text" class="form-control" minlength="2" name="titulo" value="<%=Videojuegos2[videojuego2].titulo%>" required="" >
+                                      </div>
+                                    <div class="form-group">
+                                      <label for="message-text" class="col-form-label">Identificador:</label>
+                                      <input type="text" class="form-control" name="id_videojuego" value="<%=Videojuegos2[videojuego2].id_videojuego%>" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="message-text" class="col-form-label">Estatus:</label>
+                                      <input type="text" class="form-control"   value="<%=Videojuegos2[videojuego2].estatus%>" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="message-text" class="col-form-label">Votos:</label>
+                                      <input type="text" class="form-control"  value="<%=Videojuegos2[videojuego2].votos%>" readonly>
+                                    </div>
+                                        <div class="form-group">
+                                          <label for="message-text" class="col-form-label">Descripcion:</label>
+                                          <textarea class="form-control" name="descripcion" id="descripcion"><%=Videojuegos2[videojuego2].descripcion%></textarea required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Url Imagen:</label>
+                                            <textarea class="form-control" name="imagen" id="message-text"><%=Videojuegos2[videojuego2].imagen%></textarea required>
+                                          </div>
+                                      </form>
+                                   
+                                  
+                                </div>
+
+                         
+                                <div class="modal-footer">
+                                  <center>
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                  <button type="button" id="submit" class="btn btn-warning" onClick="document.getElementById('submit_modal<%=Videojuegos2[videojuego2].id_videojuego%>1').submit();">Actualizar</button>
+                                </center>
+                                </form>
+                          
+                          
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                       
+
+                        <div class="modal fade" id="modal<%=Videojuegos2[videojuego2].id_videojuego%>2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"><%=Videojuegos2[videojuego2].titulo%></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                  <form id="submit_modal<%=Videojuegos2[videojuego2].id_videojuego%>2" action="/auth/updateaprobar" method="POST">
+
+                                    <div class="form-group">
+                                      <label for="message-text" class="col-form-label">Titulo:</label>
+                                      <input type="hidden" value="1" form="submit_modal<%=Videojuegos2[videojuego2].id_videojuego%>2" />
+                                      <input type="text" class="form-control"  name="titulo" value="<%=Videojuegos2[videojuego2].titulo%>" readonly>
+                                    </div>
+                                  <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Identificador:</label>
+                                    <input type="text" class="form-control" name="id_videojuego" value="<%=Videojuegos2[videojuego2].id_videojuego%>" readonly>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Estatus:</label>
+                                    <input type="text" class="form-control"   value="<%=Videojuegos2[videojuego2].estatus%>" readonly>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Votos:</label>
+                                    <input type="text" class="form-control"  value="<%=Videojuegos2[videojuego2].votos%>" readonly>
+                                  </div>
+                                     
+                                    </form>
+                                    <input type="hidden" id="id_estatus" name="id_estatus"  value="1" form="submit_modal<%=Videojuegos2[videojuego2].id_videojuego%>2" >
+                                
+                              </div>
+
+                       
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" id="submit" class="btn btn-success" onClick="document.getElementById('submit_modal<%=Videojuegos2[videojuego2].id_videojuego%>2').submit();">Aprobar</button>
+                              </form>
+                        
+                        
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="modal fade" id="modal<%=Videojuegos2[videojuego2].id_videojuego%>3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel"><%=Videojuegos2[videojuego2].titulo%></h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="submit_modal<%=Videojuegos2[videojuego2].id_videojuego%>3" action="/auth/updaterechazar" method="POST">
+
+                                  <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Titulo:</label>
+                                    <input type="hidden" value="1" form="submit_modal<%=Videojuegos2[videojuego2].id_videojuego%>1" />
+                                    <input type="text" class="form-control"  name="titulo"  value="<%=Videojuegos2[videojuego2].titulo%>" readonly>
+                                  </div>
+                                <div class="form-group">
+                                  <label for="message-text" class="col-form-label">Identificador:</label>
+                                  <input type="text" class="form-control" name="id_videojuego" value="<%=Videojuegos2[videojuego2].id_videojuego%>" readonly>
+                                </div>
+                                <div class="form-group">
+                                  <label for="message-text" class="col-form-label">Estatus:</label>
+                                  <input type="text" class="form-control"   value="<%=Videojuegos2[videojuego2].estatus%>" readonly>
+                                </div>
+                                <div class="form-group">
+                                  <label for="message-text" class="col-form-label">Votos:</label>
+                                  <input type="text" class="form-control"  value="<%=Videojuegos2[videojuego2].votos%>" readonly>
+                                </div>
+                                   
+                                  </form>
+                                  <input type="hidden" id="id_estatus" name="id_estatus"  value="2" form="submit_modal<%=Videojuegos2[videojuego2].id_videojuego%>3" >
+                              
+                            </div>
+
+                     
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                              <button type="button" id="submit" class="btn btn-danger" onClick="document.getElementById('submit_modal<%=Videojuegos2[videojuego2].id_videojuego%>3').submit();">Rechazar</button>
+                            </form>
+                      
+                      
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <% } %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- DataTable with Hover -->
+      
+        </div>
+
+
+
+
+
+        <!--Row-->
+
+        <!-- Documentation Link -->
+
+
+        <!-- Modal Logout -->
+        
+
+      </div>
+      <!---Container Fluid-->
+    
+
+
+<%- include layouts/footer_dashboard.ejs %>

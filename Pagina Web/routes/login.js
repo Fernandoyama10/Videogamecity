@@ -7,12 +7,11 @@ const authController = require('../controllers/usuarios');
 /* GET seccion.(productos.ejs)  */
 router.get('/',  authController.isLoggedIn, function(req, res, next) {
 
-  console.log(req.user);
-  
+   
   if(!req.user) {
 
     
-    res.render('login', { title: 'Nuestros Productos Nuevos', user: req.user });
+    res.render('login', { title: 'Login', user: req.user });
 
 
   } else if (req.user) {

@@ -11,4 +11,10 @@ router.post('/recomendado', authController.guardar );
 
 router.post('/search', authController.search );
 
+router.post('/updatestatus', authController.updatestatus );
+
+router.post('/updateaprobar', authController.updateaprobar );
+
+router.post('/updaterechazar', authController.updaterechazar );
+
 module.exports = router;
