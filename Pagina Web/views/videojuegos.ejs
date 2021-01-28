@@ -1,6 +1,51 @@
 <%- include layouts/header_regis.ejs %>
 <header>
-     
+     <style>
+      .card {
+        opacity: 0.8;
+        filter: alpha(opacity=60);
+      }
+      .card-title {
+        font-weight:bold;
+        text-align: center;
+      }
+      .card-text {
+        text-align: justify;
+      }
+      
+      .modal-header {
+        background-image: linear-gradient(#7FDBFF,white);
+      }
+      .modal-footer {
+        background-image: linear-gradient(white,#7FDBFF);
+      }
+      #left-panel-link {
+        position: relative;
+        left: 5%;
+        background-color: #555;
+        color: white;
+        font-size: 16px;
+        padding: 12px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      #right-panel-link {
+        position: absolute;
+        right: 10%;
+        background-color: #555;
+        color: white;
+        font-size: 16px;
+        padding: 12px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      .sep {
+        height: 25px;
+      }
+
+     </style>
 <div class="container">
   <hr>
   <br>
@@ -29,17 +74,34 @@
                                                     
         <% for(var videojuego=0;videojuego<Videojuegos.length;videojuego++) { %>
 
-          <div class="col-sm-3 portfolio-item ">
+          <div class="col-sm-3 portfolio-item " style="padding-top: 45px;">
+            <ul class="list-group" >
+              <li class="list-group-item list-group-item-warning"><i class="fa fa-star"style="font-size:20px;"></i>   Votos: <%=Videojuegos[videojuego].votos%> </li>
+            
+            </ul>
             <div class="card h-100 sombra-caja-lista">
+              
               <a href="#"><img class="card-img-top imagen-lista" src="<%=Videojuegos[videojuego].imagen%>" alt=""></a>
               <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#"><%=Videojuegos[videojuego].titulo%></a>
-                </h4>
-                <p class="card-text"><%=Videojuegos[videojuego].descripcion%>...</p>
+                <h4 style="font-weight:500; height: 50px;"  class="card-title">
+                  <a href="#"><%=Videojuegos[videojuego].titulo%>...</a>
+              </h4> 
+             
+              <p style="height: 70px;" class="card-text"><%=Videojuegos[videojuego].descripcion%>...</p>
+<br>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal<%=Videojuegos[videojuego].id_videojuego%>">
+                Ver
+              </button>
 
-                <p class="card-text">Votos: <%=Videojuegos[videojuego].votos%></p>
-                <a href="#" class="btn btn-primary">Ver</a>
+              <% if(user){ %>
+                <button type="button" enable=false class="btn btn-success" data-toggle="modal" data-target="#exampleModal<%=Videojuegos[videojuego].id_videojuego%>">
+                  Votar
+                </button>
+              <% } else{ %>  
+                <button type="button" disabled="true"  class="btn btn-success" data-toggle="modal" data-target="#exampleModal<%=Videojuegos[videojuego].id_videojuego%>">
+                  Votar
+                </button>
+             <% } %>
               </div>
             </div>
           </div>
@@ -48,7 +110,28 @@
       </div>
 
       <!-- /.row -->
-  
+        <!-- Row 1 -->
+        <div class="card-deck">
+          <div class="card col-sm-3">
+            <img class="card-img-top" src="http://www.orseu-concours.com/451-615-thickbox/selor-test-de-raisonnement-abstrait-niveau-a.jpg" alt="Company logo">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-success"><i class="fa fa-briefcase"style="font-size:20px;"></i>   Company</li>
+                <li class="list-group-item list-group-item-success"><i class="fa fa-user"style="font-size:20px;"></i>   Role</li>
+                <li class="list-group-item list-group-item-success"><i class="fa fa-map-marker"style="font-size:20px;"></i>   Location</li>
+                <li class="list-group-item list-group-item-success"><i class="fa fa-clock-o"style="font-size:20px;"></i>   Duration</li>
+                <li class="list-group-item list-group-item-success"><i class="fa fa-inr"style="font-size:20px;"></i>   Cost</li>
+              </ul>
+              
+            </div>
+           
+          </div>
+
+        </div>
+         <div class="sep"></div>
+        
+          <!-- Row 1 -->
   
       <!-- Features Section -->
   

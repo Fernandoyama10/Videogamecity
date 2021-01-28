@@ -7,16 +7,33 @@ const authController = require('../controllers/usuarios');
 router.get('/', authController.isLoggedIn, async function(req, res, next) {
   //hacemos el select con la variable importada de conexión 
 
-  bd.query("SELECT id_videojuego, titulo, SUBSTRING(descripcion, 1, 15) as descripcion, imagen, votos, estatus FROM tbl_videojuegos INNER JOIN estatus ON estatus.id_estatus = tbl_videojuegos.id_estatus ORDER BY tbl_videojuegos.id_estatus DESC", function(err,listjuegos){
+
+  if(!req.user){
+    var user = req.user;
+    res.redirect('/');
+  }else{
+    var user = req.user;
+    console.log(user.id_tipouser);
+  if(user.id_tipouser == '1')
+  {
+    res.redirect('/');
+  }
+  else if(user.id_tipouser == '2') {
+    bd.query("SELECT id_videojuego, titulo, SUBSTRING(descripcion, 1, 15) as descripcion, imagen, votos, estatus FROM tbl_videojuegos INNER JOIN estatus ON estatus.id_estatus = tbl_videojuegos.id_estatus ORDER BY tbl_videojuegos.id_estatus DESC", function(err,listjuegos){
     
-    bd.query("SELECT id_videojuego, titulo, descripcion, imagen, votos, estatus FROM tbl_videojuegos INNER JOIN estatus ON estatus.id_estatus = tbl_videojuegos.id_estatus ORDER BY tbl_videojuegos.id_estatus DESC", function(err,listjuegos2){
-   
-        res.render('dashboard', { title: 'VideoGamesCity', Videojuegos:listjuegos, Videojuegos2:listjuegos2 });
+      bd.query("SELECT id_videojuego, titulo, descripcion, imagen, votos, estatus FROM tbl_videojuegos INNER JOIN estatus ON estatus.id_estatus = tbl_videojuegos.id_estatus ORDER BY tbl_videojuegos.id_estatus DESC", function(err,listjuegos2){
+     
+          res.render('dashboard', { title: 'VideoGamesCity', Videojuegos:listjuegos, Videojuegos2:listjuegos2 });
+  
+          });
+  
+      });
+  
 
-        });
+  }
+  }
 
-    });
-
+  
 
 
   });
