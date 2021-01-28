@@ -16,7 +16,41 @@ exports.login = async (req, res) => {
       })
     }
 
+
     bd.query('SELECT * FROM usuario WHERE correo = ?', [correo], async (error, results) => {
+
+        if(results.length > 0) {
+          
+          if( !results[0].correo || !(await bcrypt.compare(contrasena, results[0].contrasena)) ) {
+            res.status(401).render('login', {
+              message: 'Correo o contraseña invalido.'
+            })
+          } else {
+
+            const id = results[0].id_usuario;
+    
+            const token = jwt.sign({ id }, process.env.JWT_SECRET, {
+              expiresIn: process.env.JWT_EXPIRES_IN
+            });
+    
+            console.log("The token is: " + token);
+    
+            const cookieOptions = {
+              expires: new Date(
+                Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+              ),
+              httpOnly: true
+            }
+    
+            res.cookie('jwt', token, cookieOptions );
+            res.status(200).redirect("/");
+          }
+        }else {
+            return res.render('login', {
+                message: 'Correo o contraseña invalido.'
+            });
+        }
+
 
 
 
@@ -145,14 +179,14 @@ bd.query('INSERT INTO usuario set ?', {nombre : nombre,apellido : apellido, corr
     }
 }); 
 
-
-
     }); 
 }
 
 exports.guardar =  async (req, res, next) => {
   // console.log(req.cookies);
   const {titulo, descripcion, votos='1', id_estatus='2'} = req.body;
+  //const puntos = 0;
+  var puntos = 0;
   if( req.cookies.jwt) {
     try {
       //1) verify the token
@@ -171,10 +205,33 @@ exports.guardar =  async (req, res, next) => {
           }
   
           if(results.length > 0) {
-              return res.render('recomendar', {
-                  message: 'El video juego ya se encuentra registrado'
-              });
-              //aquí podría registrar el punto del video juego si se encuentra registrado.
+
+              //aquí va procesar el puntaje
+            bd.query('SELECT votos FROM tbl_videojuegos where titulo = ?',[titulo] ,async (error, totalvot) => {
+              if(error){
+                  console.log(error);
+          
+              }if(totalvot.length > 0) {
+                  console.log(totalvot);
+                  puntos = totalvot[0].votos + 1;
+                  console.log(puntos);
+                  bd.query('UPDATE tbl_videojuegos SET votos = ' + [puntos] +' WHERE titulo = ?', [titulo],(error, results) => {
+                      if(error){
+                          console.log(error);
+                          console.log("ERROR EL SQL EN LA SINTAXIS");
+                  
+                      }else {
+                        console.log("ENTRA PARA ACTIVAR EL MENSAJE");
+                          return res.render('recomendar', {
+                            precaucion: 'Videojuego ya esta registrado se conto el VOTO'
+                        });
+                        
+                      }
+                  });
+                 
+              }
+          });
+              
           }
           
       bd.query('INSERT INTO tbl_videojuegos set ?', {titulo : titulo, descripcion : descripcion, votos : votos, id_estatus : id_estatus}, (error, results) => {
@@ -200,7 +257,7 @@ exports.guardar =  async (req, res, next) => {
                       }else {
                           console.log(results);
                           return res.render('recomendar', {
-                              messagessucces: 'Videojuego Registrado correctamente'
+                            messagessucces: 'Videojuego Registrado correctamente'
                           });
                       }
                   });
