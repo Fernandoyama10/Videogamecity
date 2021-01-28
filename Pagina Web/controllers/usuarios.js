@@ -199,77 +199,99 @@ exports.guardar =  async (req, res, next) => {
 
      // console.log(req.body);
 
-      bd.query('SELECT titulo FROM tbl_videojuegos WHERE titulo = ?', [titulo], async (error,results) =>{
-          if(error){
-              console.log(error);
-          }
-  
-          if(results.length > 0) {
+     bd.query('SELECT titulo FROM tbl_videojuegos WHERE titulo = ?', [titulo], async (error,results) =>{ 
 
-              //aquí va procesar el puntaje
-            bd.query('SELECT votos FROM tbl_videojuegos where titulo = ?',[titulo] ,async (error, totalvot) => {
-              if(error){
-                  console.log(error);
-          
-              }if(totalvot.length > 0) {
-                  console.log(totalvot);
-                  puntos = totalvot[0].votos + 1;
-                  console.log(puntos);
-                  bd.query('UPDATE tbl_videojuegos SET votos = ' + [puntos] +' WHERE titulo = ?', [titulo],(error, results) => {
-                      if(error){
-                          console.log(error);
-                          console.log("ERROR EL SQL EN LA SINTAXIS");
-                  
-                      }else {
-                        console.log("ENTRA PARA ACTIVAR EL MENSAJE");
-                           return res.render('recomendar', {
-                            precaucion: 'Videojuego ya esta registrado se conto el VOTO'
-                        });
-                        
-                      }
-                  });
-                 
-              }
-          });
-              
-          }
-          
-      bd.query('INSERT INTO tbl_videojuegos set ?', {titulo : titulo, descripcion : descripcion, votos : votos, id_estatus : id_estatus}, (error, results) => {
       if(error){
-          console.log(results);
-          return res.render('recomendar', {
-              messages: 'Videojuego no fue registrado'
-          });
-  
-      }else{
-          console.log(results);
-          bd.query('SELECT id_videojuego FROM tbl_videojuegos where titulo = ?',[titulo] ,async (error, id_video) => {
-              if(error){
-                  console.log(error);
-          
-              }else {
-                  console.log(id_video);
-                  bd.query('INSERT INTO tbl_recomendaciones set ?', {id_usuario:decoded.id,id_videojuego:id_video[0].id_videojuego},(error, results) => {
-                      if(error){
-                          console.log(error);
-                          console.log(id_video);
-                  
-                      }else {
-                          console.log(results);
-                          return res.render('recomendar', {
-                            messagessucces: 'Videojuego Registrado correctamente'
-                          });
-                      }
-                  });
-                 
-              }
-          });
+        console.log(error);
+      }
+
+
+      if(results.length <= 0){     
+
+        bd.query('INSERT INTO tbl_videojuegos set ?', {titulo : titulo, descripcion : descripcion, votos : votos, id_estatus : id_estatus}, (error, results) => {
+          if(error){
+              console.log(results);
+              return res.render('recomendar', {
+                  messages: 'Videojuego no fue registrado'
+              });
+      
+          }else{
+              console.log(results);
+              bd.query('SELECT id_videojuego FROM tbl_videojuegos where titulo = ?',[titulo] ,async (error, id_video) => {
+                  if(error){
+                      console.log(error);
+              
+                  }else {
+                      console.log(id_video);
+                      bd.query('INSERT INTO tbl_recomendaciones set ?', {id_usuario:decoded.id,id_videojuego:id_video[0].id_videojuego},(error, results) => {
+                          if(error){
+                              console.log(error);
+                              console.log(id_video);
+                      
+                          }else {
+                              console.log(results);
+                              return res.render('recomendar', {
+                                messagessucces: 'Videojuego Registrado correctamente'
+                              });
+                          }
+                      });
+                     
+                  }
+              });   
+    
+          }
+      });
 
       }
-  });
+      if(results.length > 0){
 
-      }); 
+      bd.query('SELECT titulo FROM tbl_videojuegos WHERE id_estatus= 2 AND titulo = ?', [titulo], async (error,results2) =>{
+        if(error){
+            console.log(error);
+        }
 
+        if(results2.length > 0){
+
+          console.log("ENTRA PARA ACTIVAR EL MENSAJE DE VIDEO JUEGO REGISTRADO NO APROBADO");
+          return res.render('recomendar', {
+            message: 'Videojuego ya esta registrado, pero NO SE HA APROVADO'
+           });  
+        }
+        if(results2.length <= 0) {
+
+            //aquí va procesar el puntaje
+          bd.query('SELECT votos FROM tbl_videojuegos where titulo = ?',[titulo] ,async (error, totalvot) => {
+            if(error){
+                console.log(error);
+        
+            }if(totalvot.length > 0) {
+                console.log(totalvot);
+                puntos = totalvot[0].votos + 1;
+                console.log(puntos);
+                bd.query('UPDATE tbl_videojuegos SET votos = ' + [puntos] +' WHERE titulo = ?', [titulo],(error, results) => {
+                    if(error){
+                        console.log(error);
+                        console.log("ERROR EL SQL EN LA SINTAXIS");
+                
+                    }else {
+                      console.log("ENTRA PARA ACTIVAR EL MENSAJE");
+                         return res.render('recomendar', {
+                          precaucion: 'Videojuego ya esta registrado se conto el VOTO'
+                      });
+                      
+                    }
+                });
+               
+            }
+           
+          });
+            
+        }
+        
+    }); 
+      }
+
+     }); 
 
     } catch (error) {
       console.log(error);
@@ -373,12 +395,56 @@ exports.updaterechazar = async  (req, res, next) => {
   
       });
 
+}
+
+exports.votarjuego = async  (req, res, next) => {
+
+  console.log(req.body);
+    const {id_videojuego} = req.body;
+    var puntos = 0;
+    bd.query("SELECT SUBSTRING(descripcion, 1, 60) as descripcion, SUBSTRING(titulo, 1, 27) as titulo, id_videojuego, imagen, votos FROM tbl_videojuegos WHERE id_estatus = 1 ORDER BY votos DESC", function(err,listjuegos){
+
+      bd.query("SELECT descripcion, titulo, id_videojuego, imagen, votos FROM tbl_videojuegos WHERE id_estatus = 1 ORDER BY votos DESC", function(err,listjuegos2){
+
+       
+          
+    bd.query('SELECT votos FROM tbl_videojuegos where id_videojuego = ?',[id_videojuego] ,async (error, totalvot) => {
+      if(error){
+          console.log(error);
+  
+      }if(totalvot.length > 0) {
+          console.log(totalvot);
+          puntos = totalvot[0].votos + 1;
+          console.log(puntos);
+          bd.query('UPDATE tbl_videojuegos SET votos = ' + [puntos] +' WHERE id_videojuego = ?', [id_videojuego],(error, results) => {
+              if(error){
+                  console.log(error);
+                  console.log("------ERROR EL SQL EN LA SINTAXIS--------");
+          
+              }else {
+                console.log("------------ENTRA PARA ACTIVAR EL MENSAJE de exito---------------");
+               return res.render('index', {
+                    messagessucces: 'Voto registrado', Videojuegos:listjuegos, Videojuegos2:listjuegos2 });   
+              }
+          });
+         
+      }
+  });
 
 
-    
+      });
+
+      });
+
+
+
+
+
 
 
 }
+
+
 
 exports.isLoggedIn = async (req, res, next) => {
   // console.log(req.cookies);
