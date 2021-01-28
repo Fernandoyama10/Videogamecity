@@ -46,14 +46,12 @@
 
               <div class="row">
                 <div class="col-lg-2 col-md-2 col-sm-4"></div>
-              <div class="col-lg-2 col-md-2 col-sm-4"><center><a href="#"><img style=" padding-left: 40px; height: 178px; width: 170px;" class="card-img-top imagen-lista" src="https://cdn.discordapp.com/attachments/756363152865624124/803420969108504606/design-b019565b-3766-4e3b-8520-d4a282ccc177.png" alt=""></a></center></div>
+              <div class="col-lg-2 col-md-2 col-sm-4"><a href="#"><img style=" padding-left: 40px; height: 178px; width: 170px;" class="card-img-top imagen-lista" src="https://cdn.discordapp.com/attachments/756363152865624124/803420969108504606/design-b019565b-3766-4e3b-8520-d4a282ccc177.png" alt=""></a></div>
             
               <% if(user){ %>
                 <div class="col-lg-4 col-md-2 col-sm-4" style="padding-top:40px;"><a class="btn btn-success btn-block" style="text-align: center;"  href="../recomendar"><H5>Recomienda tu juego favorito ! <i class="fas fa-plus-circle"></i></H5></a></div>
             
               <% } else{ %>  
-            
-           
             
                   <div class="col-lg-4 col-md-2 col-sm-4" style="padding-top:40px;"><a class="btn btn-success btn-block" style="text-align: center;"  href="../recomendar"><H6>INICIA SESIÓN PARA RECOMENDAR JUEGOS </H6></a></div>
 
@@ -62,18 +60,14 @@
               
              
              
-              <div class="col-lg-2 col-md-2 col-sm-4"><center><a><img style="padding-right: 20px; height: 180px; width: 180px;" class="card-img-top imagen-lista" src="https://cdn.discordapp.com/attachments/756363152865624124/803374432038813696/vinilos-infantiles-super-mario-bros.png" alt=""></a></center></div>
+              <div class="col-lg-2 col-md-2 col-sm-4"><a><img style="padding-right: 20px; height: 180px; width: 180px;" class="card-img-top imagen-lista" src="https://cdn.discordapp.com/attachments/756363152865624124/803374432038813696/vinilos-infantiles-super-mario-bros.png" alt=""></a></div>
               <div class="col-lg-2 col-md-2 col-sm-4"></div>
-              
-
             </div>
         </div>
     </div>
   </div>
-     
 <div class="container">
   <br>
-
 
   <br>
   <div class="linea-separadora"></div>
@@ -99,20 +93,31 @@
                       <div class="card h-100 sombra-caja-lista">
                         <a ><center><img class="card-img-top imagen-lista" src="<%=Videojuegos[videojuego].imagen%>" alt=""></center></a>
                         <div class="card-body">
-                          <h4 class="card-title">
-                            <a href="#"><%=Videojuegos[videojuego].titulo%></a>
-                          </h4>
-                          <p class="card-text"><%=Videojuegos[videojuego].descripcion%>...</p>
+                         
+                          <h4 style="font-weight:500; height: 50px;"  class="card-title">
+                              <a href="#"><%=Videojuegos[videojuego].titulo%>...</a>
+                          </h4> 
+                         
+                          <p style="height: 70px;" class="card-text"><%=Videojuegos[videojuego].descripcion%>...</p>
+                          
           
-                          <p class="card-text">Votos: <%=Videojuegos[videojuego].votos%></p>
+                          <p style="font-weight: bold;" class="card-text">Votos: <%=Videojuegos[videojuego].votos%></p>
           
           
                           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal<%=Videojuegos[videojuego].id_videojuego%>">
                             Ver
                           </button>
-                    
-             
-          
+
+                          <% if(user){ %>
+                            <button type="button" enable=false class="btn btn-success" data-toggle="modal" data-target="#exampleModal<%=Videojuegos[videojuego].id_videojuego%>">
+                              Votar
+                            </button>
+                          <% } else{ %>  
+                            <button type="button" disabled="true"  class="btn btn-success" data-toggle="modal" data-target="#exampleModal<%=Videojuegos[videojuego].id_videojuego%>">
+                              Votar
+                            </button>
+                         <% } %>
+
                         </div>
                       </div>
                     </div>
