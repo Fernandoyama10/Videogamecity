@@ -39,140 +39,161 @@
     </a>
   </div>
 
+  <div class="banner2">
+    <div class="">
+        <div class="row fill_height">
+            <div class="col-lg-12">
 
+              <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-4"></div>
+              <div class="col-lg-2 col-md-2 col-sm-4"><center><a href="#"><img style=" padding-left: 40px; height: 178px; width: 170px;" class="card-img-top imagen-lista" src="https://cdn.discordapp.com/attachments/756363152865624124/803420969108504606/design-b019565b-3766-4e3b-8520-d4a282ccc177.png" alt=""></a></center></div>
+            
+              <% if(user){ %>
+                <div class="col-lg-4 col-md-2 col-sm-4" style="padding-left: 80px; padding-top:30px;"><a class="btn btn-success btn-block" style="text-align: center;"  href="../recomendar"><H5>Recomienda tu juego favorito ! <i class="fas fa-plus-circle"></i></H5></a></div>
+            
+              <% } else{ %>  
+            
+           
+            
+                  <div class="col-lg-4 col-md-2 col-sm-4" style="padding-left: 80px; padding-top:40px;"><a class="btn btn-success btn-block" style="text-align: center;"  href="../recomendar"><H6>INICIA SESIÓN PARA RECOMENDAR JUEGOS </H6></a></div>
+
+             <% } %>
+            
+              
+             
+             
+              <div class="col-lg-2 col-md-2 col-sm-4"><center><a><img style="padding-right: 20px; height: 180px; width: 180px;" class="card-img-top imagen-lista" src="https://cdn.discordapp.com/attachments/756363152865624124/803374432038813696/vinilos-infantiles-super-mario-bros.png" alt=""></a></center></div>
+              <div class="col-lg-2 col-md-2 col-sm-4"></div>
+              
+
+            </div>
+        </div>
+    </div>
+  </div>
      
 <div class="container">
   <br>
-  <div class="row">
-    <div class="col col-sm-2"></div>
-  <div class="col col-sm-2"><a href="#"><img style=" padding-left: 40px; height: 178px; width: 170px;" class="card-img-top imagen-lista" src="https://cdn.discordapp.com/attachments/756363152865624124/803420969108504606/design-b019565b-3766-4e3b-8520-d4a282ccc177.png" alt=""></a></div>
 
-  <% if(user){ %>
-    <div class="col col-sm-4" style="padding-left: 80px; padding-top:20px;"><a class="btn btn-success btn-block" style="text-align: center;"  href="../recomendar"><H6>RECOMIENDA TU VIDEO JUEGO <i class="fas fa-plus-circle"></i></H6></a></div>
-
-  <% } else{ %>  
-
-  
- <% } %>
-
-  
- 
- 
-  <div class="col col-sm-2"><a href="#"><img style="padding-right: 20px; height: 180px; width: 180px;" class="card-img-top imagen-lista" src="https://cdn.discordapp.com/attachments/756363152865624124/803374432038813696/vinilos-infantiles-super-mario-bros.png" alt=""></a></div>
-  <div class="col col-sm-2"></div>
-  </div>
 
   <br>
   <div class="linea-separadora"></div>
   
-    <!-- Page Content -->
-    <div class="container">
-      <div class="row">
-        <div class="col offset-lg-3">
- <h1 id="rankings" class="my-4 bienvenida-text">RANKING RECOMENDADOS
-        </div>
-        
-      </div>
-      <!-- Marketing Icons Section -->
-      <div class="row">
 
-                                                    
-        <% for(var videojuego=0;videojuego<Videojuegos.length;videojuego++) { %>
-
-            <div class="col-sm-3 portfolio-item ">
-            <div class="card h-100 sombra-caja-lista">
-              <a href="#"><img class="card-img-top imagen-lista" src="<%=Videojuegos[videojuego].imagen%>" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#"><%=Videojuegos[videojuego].titulo%></a>
-                </h4>
-                <p class="card-text"><%=Videojuegos[videojuego].descripcion%>...</p>
-
-                <p class="card-text">Votos: <%=Videojuegos[videojuego].votos%></p>
-
-
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal<%=Videojuegos[videojuego].id_videojuego%>">
-                  Ver
-                </button>
+  <div class="banner2">
+        <div class="row fill_height">
+            <div class="col-lg-12">
+              <div class="container">
+                <div class="row">
+                  <div class="col offset-lg-3">
+           <h1 id="rankings" class="my-4 bienvenida-text">RANKING RECOMENDADOS
+                  </div>
+                  
+                </div>
+                <!-- Marketing Icons Section -->
+                <div class="row">
           
-   
-
+                                                              
+                  <% for(var videojuego=0;videojuego<Videojuegos.length;videojuego++) { %>
+          
+                      <div class="col-lg-3 col-md-2 col-sm-4 portfolio-item ">
+                      <div class="card h-100 sombra-caja-lista">
+                        <a ><center><img class="card-img-top imagen-lista" src="<%=Videojuegos[videojuego].imagen%>" alt=""></center></a>
+                        <div class="card-body">
+                          <h4 class="card-title">
+                            <a href="#"><%=Videojuegos[videojuego].titulo%></a>
+                          </h4>
+                          <p class="card-text"><%=Videojuegos[videojuego].descripcion%>...</p>
+          
+                          <p class="card-text">Votos: <%=Videojuegos[videojuego].votos%></p>
+          
+          
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal<%=Videojuegos[videojuego].id_videojuego%>">
+                            Ver
+                          </button>
+                    
+             
+          
+                        </div>
+                      </div>
+                    </div>
+          
+                    <% } %>
+                </div>
+               
+                <!-- /.row -->
+          
+                <div class="row">
+          
+                                                              
+                  <% for(var videojuego=0;videojuego<Videojuegos.length;videojuego++) { %>
+          
+                                 <!-- Modal -->
+                                 <div class="modal fade" id="<%=Videojuegos[videojuego].id_videojuego%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel"><%=Videojuegos[videojuego].titulo%></h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        ...
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>      
+          
+                    <% } %>
+                </div>
+          
+          
+                <!-- /.row -->
+            
+                <!-- Features Section -->
+                <div class="row">
+                  <div class="col-lg-6">
+                    <h2>Modern Business Features</h2>
+                    <p>The Modern Business template by Start Bootstrap includes:</p>
+                    <ul>
+                      <li>
+                        <strong>Bootstrap v4</strong>
+                      </li>
+                      <li>jQuery</li>
+                      <li>Font Awesome</li>
+                      <li>Working contact form with validation</li>
+                      <li>Unstyled page elements for easy customization</li>
+                    </ul>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
+                  </div>
+                  <div class="col-lg-6">
+                    <img class="img-fluid rounded" src="http://placehold.it/700x450" alt="">
+                  </div>
+                </div>
+                <!-- /.row -->
+          
+                <hr>
+            
+                <!-- Call to Action Section -->
+                <div class="row mb-4">
+                  <div class="col-md-8">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
+                  </div>
+                  <div class="col-md-4">
+                    <a class="btn btn-lg btn-secondary btn-block" href="#">Call to Action</a>
+                  </div>
+                </div>
+            
               </div>
             </div>
-          </div>
-
-          <% } %>
-      </div>
-     
-      <!-- /.row -->
-
-      <div class="row">
-
-                                                    
-        <% for(var videojuego=0;videojuego<Videojuegos.length;videojuego++) { %>
-
-                       <!-- Modal -->
-                       <div class="modal fade" id="<%=Videojuegos[videojuego].id_videojuego%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel"><%=Videojuegos[videojuego].titulo%></h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              ...
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>      
-
-          <% } %>
-      </div>
-
-
-      <!-- /.row -->
+        </div>
+  </div>
   
-      <!-- Features Section -->
-      <div class="row">
-        <div class="col-lg-6">
-          <h2>Modern Business Features</h2>
-          <p>The Modern Business template by Start Bootstrap includes:</p>
-          <ul>
-            <li>
-              <strong>Bootstrap v4</strong>
-            </li>
-            <li>jQuery</li>
-            <li>Font Awesome</li>
-            <li>Working contact form with validation</li>
-            <li>Unstyled page elements for easy customization</li>
-          </ul>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
-        </div>
-        <div class="col-lg-6">
-          <img class="img-fluid rounded" src="http://placehold.it/700x450" alt="">
-        </div>
-      </div>
-      <!-- /.row -->
-
-      <hr>
-  
-      <!-- Call to Action Section -->
-      <div class="row mb-4">
-        <div class="col-md-8">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
-        </div>
-        <div class="col-md-4">
-          <a class="btn btn-lg btn-secondary btn-block" href="#">Call to Action</a>
-        </div>
-      </div>
-  
-    </div>
+ 
 
   </header>
   
