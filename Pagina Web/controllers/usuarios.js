@@ -399,7 +399,24 @@ exports.updaterechazar = async  (req, res, next) => {
 
 exports.votarjuego = async  (req, res, next) => {
 
+
+  if( req.cookies.jwt) {
+    try {
+      //1) verify the token
+      const decoded = await promisify(jwt.verify)(req.cookies.jwt,
+      process.env.JWT_SECRET
+      );
+
+      console.log(decoded);
+
+
   console.log(req.body);
+
+
+  bd.query('SELECT id_usuario, SUBSTRING(nombre, 1, 15) as nombre, apellido, contrasena, correo, id_tipouser FROM usuario WHERE id_usuario = ?', [decoded.id], (error, datos) => {
+    console.log(datos);
+
+
     const {id_videojuego} = req.body;
     var puntos = 0;
     bd.query("SELECT SUBSTRING(descripcion, 1, 60) as descripcion, SUBSTRING(titulo, 1, 27) as titulo, id_videojuego, imagen, votos FROM tbl_videojuegos WHERE id_estatus = 1 ORDER BY votos DESC", function(err,listjuegos){
@@ -424,7 +441,7 @@ exports.votarjuego = async  (req, res, next) => {
               }else {
                 console.log("------------ENTRA PARA ACTIVAR EL MENSAJE de exito---------------");
                return res.render('index', {
-                    messagessucces: 'Voto registrado', Videojuegos:listjuegos, Videojuegos2:listjuegos2 });   
+                    messagessucces: 'Voto registrado', Videojuegos:listjuegos, Videojuegos2:listjuegos2, user:datos });   
               }
           });
          
@@ -436,10 +453,19 @@ exports.votarjuego = async  (req, res, next) => {
 
       });
 
+  });
 
 
 
 
+
+    } catch (error) {
+      console.log(error);
+      return next();
+    }
+  } else {
+    next();
+  }
 
 
 }
