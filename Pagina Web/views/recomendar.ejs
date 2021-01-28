@@ -28,8 +28,7 @@
                                 <!--
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->
                                 <% if(typeof message!= "undefined" && message) { %>
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert"><strong><%= message %></strong>&nbsp;&nbsp;&nbsp;
-                                        <a class="btn btn-info" href="/">Ir al Ranking</a>
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert"><strong><%= message %></strong>
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                           </button>
@@ -44,7 +43,7 @@
                                     </div>
                                 <% } %>
                                 <% if(typeof precaucion!= "undefined" && precaucion) { %>
-                                    <div class="alert alert-primary alert-dismissible fade show" role="alert"><strong><%= precaucion %></strong>
+                                    <div class="alert alert-primary alert-dismissible fade show" role="alert"><strong><%= precaucion %></strong>&nbsp;&nbsp;
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                               </button>

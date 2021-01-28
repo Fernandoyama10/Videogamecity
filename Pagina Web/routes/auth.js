@@ -17,4 +17,6 @@ router.post('/updateaprobar', authController.updateaprobar );
 
 router.post('/updaterechazar', authController.updaterechazar );
 
+router.post('/votarjuego', authController.votarjuego );
+
 module.exports = router;

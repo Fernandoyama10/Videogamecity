@@ -104,17 +104,36 @@
                           <p style="font-weight: bold;" class="card-text">Votos: <%=Videojuegos[videojuego].votos%></p>
           
           
-                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal<%=Videojuegos[videojuego].id_videojuego%>">
-                            Ver
-                          </button>
+                         
 
                           <% if(user){ %>
-                            <button type="button" enable=false class="btn btn-success" data-toggle="modal" data-target="#exampleModal<%=Videojuegos[videojuego].id_videojuego%>">
-                              Votar
-                            </button>
+                            <form action="/auth/votarjuego" method="POST">
+
+                                  <% if(typeof messagessucces!= "undefined" && messagessucces) { %>
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert"><strong><%= messagessucces %></strong>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                    </div>
+                                <% } %>
+                              <button type="submit" enable=false class="btn btn-success" data-toggle="modal" data-target="#exampleModal<%=Videojuegos[videojuego].id_videojuego%>">
+                                Votar
+                              </button>
+                              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal<%=Videojuegos[videojuego].id_videojuego%>1">
+                                Ver
+                              </button>
+                              <div class="form-group">
+                                <input type="name" class="form-control form-control-sm" style="display: none;" value="<%=Videojuegos[videojuego].titulo%>" name="titulo"  autocomplete="off" required>
+                                <input type="name" class="form-control form-control-sm" style="display: none"  value="<%=Videojuegos[videojuego].id_videojuego%>" name="id_videojuego"  autocomplete="off" required>
+                            </div>
+                            </form>
+                           
                           <% } else{ %>  
                             <button type="button" disabled="true"  class="btn btn-success" data-toggle="modal" data-target="#exampleModal<%=Videojuegos[videojuego].id_videojuego%>">
                               Votar
+                            </button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal<%=Videojuegos[videojuego].id_videojuego%>">
+                              Ver
                             </button>
                          <% } %>
 
@@ -128,20 +147,22 @@
                 <!-- /.row -->
           
                 <div class="row">                          
-                  <% for(var videojuego=0;videojuego<Videojuegos.length;videojuego++) { %>
+                  <% for(var videojuego2=0;videojuego2<Videojuegos2.length;videojuego2++) { %>
           
                                  <!-- Modal -->
-                                 <div class="modal fade" id="<%=Videojuegos[videojuego].id_videojuego%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                 <div class="modal fade" id="modal<%=Videojuegos2[videojuego2].id_videojuego%>1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                       <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel"><%=Videojuegos[videojuego].titulo%></h5>
+                                        <h5 class="modal-title" id="exampleModalLabel"><%=Videojuegos2[videojuego2].titulo%></h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                         </button>
                                       </div>
                                       <div class="modal-body">
-                                        ...
+                                        <p style="height: 70px;" class="card-text"><%=Videojuegos2[videojuego2].descripcion%></p>
+                                        <p style="font-weight: bold;" class="card-text">Votos: <%=Videojuegos2[videojuego2].votos%></p>
+                                        
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
