@@ -222,7 +222,7 @@ exports.guardar =  async (req, res, next) => {
                   
                       }else {
                         console.log("ENTRA PARA ACTIVAR EL MENSAJE");
-                          return res.render('recomendar', {
+                           return res.render('recomendar', {
                             precaucion: 'Videojuego ya esta registrado se conto el VOTO'
                         });
                         
