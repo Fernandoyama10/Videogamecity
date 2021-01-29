@@ -231,7 +231,7 @@ exports.guardar =  async (req, res, next) => {
                           }else {
                               console.log(results);
                               return res.render('recomendar', {
-                                messagessucces: 'Videojuego Registrado correctamente'
+                                messagessucces: 'Videojuego Registrado correctamente!!'
                               });
                           }
                       });
@@ -254,7 +254,7 @@ exports.guardar =  async (req, res, next) => {
 
           console.log("ENTRA PARA ACTIVAR EL MENSAJE DE VIDEO JUEGO REGISTRADO NO APROBADO");
           return res.render('recomendar', {
-            message: 'Videojuego ya esta registrado, pero NO SE HA APROBADO'
+            message: 'El Videojuego ya esta registrado, pero NO SE HA APROBADO'
            });  
         }
         if(results2.length <= 0) {
@@ -276,7 +276,7 @@ exports.guardar =  async (req, res, next) => {
   
               console.log("ENTRA PARA ACTIVAR EL MENSAJE DE YA HAS REGISTRADO EL VIDEO JUEGO");
               return res.render('recomendar', {
-                message: 'Tu votación ya ha sido registrada, VOTA POR OTRO videojuego', 
+                message: '!Lo siento, ya has votodo por ese video juego, Vota por otro', 
                });  
   
             }if(resultado.length <= 0){
