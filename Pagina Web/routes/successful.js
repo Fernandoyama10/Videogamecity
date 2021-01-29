@@ -18,7 +18,7 @@ router.get('/', authController.isLoggedIn, async function(req, res, next) {
   
     
   
-        res.render('successful', { title: 'Error', mensaje: 'Lo siento, ya haz votado por este videojuego. Vota por otro.' });
+        res.render('successful', { title: 'Error', mensaje: 'Lo siento, ya has votado por este videojuego. Vota por otro.' });
   
   
     }); 
