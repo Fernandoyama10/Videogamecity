@@ -9,7 +9,7 @@ router.post('/', authController.isLoggedIn, async function(req, res, next) {
 
   const { typeahead } = req.body;
 
-    bd.query('SELECT * from tbl_videojuegos where titulo like "%'+[typeahead]+'%" && id_estatus=1', async function(err,listjuegos){
+    bd.query('SELECT SUBSTRING(descripcion, 1, 80) as descripcion, SUBSTRING(titulo, 1, 27) as titulo, id_videojuego, imagen, votos from tbl_videojuegos where titulo like "%'+[typeahead]+'%" && id_estatus=1', async function(err,listjuegos){
       
         res.render('videojuegos', { title: 'VideoGamesCity', Videojuegos : listjuegos, user : req.user  });
 
