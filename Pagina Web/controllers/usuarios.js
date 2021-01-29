@@ -276,7 +276,7 @@ exports.guardar =  async (req, res, next) => {
   
               console.log("ENTRA PARA ACTIVAR EL MENSAJE DE YA HAS REGISTRADO EL VIDEO JUEGO");
               return res.render('recomendar', {
-                message: 'Tu votación ya ha sido registrada, VOTA POR OTRO videojuego'
+                message: 'Tu votación ya ha sido registrada, VOTA POR OTRO videojuego', 
                });  
   
             }if(resultado.length <= 0){
@@ -460,12 +460,7 @@ exports.votarjuego = async  (req, res, next) => {
       process.env.JWT_SECRET
       );
 
-      console.log(decoded);
-
-
-  console.log(req.body);
-
-
+ 
   bd.query('SELECT id_usuario, SUBSTRING(nombre, 1, 15) as nombre, apellido, contrasena, correo, id_tipouser FROM usuario WHERE id_usuario = ?', [decoded.id], (error, datos) => {
     console.log(datos);
 
@@ -491,7 +486,7 @@ exports.votarjuego = async  (req, res, next) => {
             }if(resultado.length > 0){
   
               console.log("ENTRA PARA ACTIVAR EL MENSAJE DE YA HAS REGISTRADO EL VIDEO JUEGO");
-              return res.render('index', {
+               res.render('index', {
                 message: 'Tu votación ya ha sido registrada, VOTA POR OTRO videojuego', Videojuegos:listjuegos, Videojuegos2:listjuegos2, user:datos });  
   
             }if(resultado.length <= 0){

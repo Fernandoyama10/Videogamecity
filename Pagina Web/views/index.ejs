@@ -47,7 +47,7 @@
               <div class="row">
                 <div class="col-lg-2 col-md-2 col-sm-4"></div>
               <div class="col-lg-2 col-md-2 col-sm-4">
-                <a href="#"><img style=" padding-left: 40px; height: 178px; width: 170px;" class="card-img-top imagen-lista" src="https://cdn.discordapp.com/attachments/756363152865624124/803420969108504606/design-b019565b-3766-4e3b-8520-d4a282ccc177.png" alt=""></a>
+                <a><img style=" padding-left: 40px; height: 178px; width: 170px;" class="card-img-top imagen-lista" src="https://cdn.discordapp.com/attachments/756363152865624124/803420969108504606/design-b019565b-3766-4e3b-8520-d4a282ccc177.png" alt=""></a>
               </div>
             
               <% if(user){ %>
@@ -116,9 +116,16 @@
           
 
                       <div class="col-lg-3 col-md-2 col-sm-4 portfolio-item " style="padding-top: 45px;padding-bottom: 25px;"     >
-                        <ul class="list-group" >
-                          <li class="list-group-item list-group-item-warning"><i class="fa fa-star"style="font-size:20px;"></i>   Votos: <%=Videojuegos[videojuego].votos%> </li>
-                        </ul>
+                        <% if(Videojuegos[videojuego].votos > "50"){ %>
+                          <ul class="list-group" >
+                            <li class="list-group-item list-group-item-danger"><i class="fa fa-star"style="font-size:20px;"></i>   Votos: <%=Videojuegos[videojuego].votos%> </li>
+                          </ul>
+                          <% } else{ %>  
+                            <ul class="list-group" >
+                              <li class="list-group-item list-group-item-warning"><i class="fa fa-star"style="font-size:20px;"></i>   Votos: <%=Videojuegos[videojuego].votos%> </li>
+                            </ul>
+                            <% } %>
+                       
                       <div class="card h-100 sombra-caja-lista">
 
                         <a ><center><img class="card-img-top imagen-lista" src="<%=Videojuegos[videojuego].imagen%>" alt=""></center></a>
