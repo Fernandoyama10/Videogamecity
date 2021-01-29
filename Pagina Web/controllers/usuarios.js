@@ -486,8 +486,7 @@ exports.votarjuego = async  (req, res, next) => {
             }if(resultado.length > 0){
   
               console.log("ENTRA PARA ACTIVAR EL MENSAJE DE YA HAS REGISTRADO EL VIDEO JUEGO");
-               res.render('index', {
-                message: 'Tu votación ya ha sido registrada, VOTA POR OTRO videojuego', Videojuegos:listjuegos, Videojuegos2:listjuegos2, user:datos });  
+               res.redirect('/successful/error');  
   
             }if(resultado.length <= 0){
 
@@ -526,8 +525,7 @@ exports.votarjuego = async  (req, res, next) => {
                                     
                                   
                                           console.log("ENTRA PARA ACTIVAR EL MENSAJE DE NUEVO PUNTO VIDEO REGISTRADO ANTES REGISTRADO, PERO NO VOTADO");
-                                          return res.render('index', {
-                                            messagessucces: 'Voto Registrado Correctamente', Videojuegos:listjuegos, Videojuegos2:listjuegos2, user:datos });
+                                          res.redirect('/successful');  
                                   
                                         });
                                   
