@@ -392,14 +392,14 @@ exports.updatestatus = async  (req, res, next) => {
 
 exports.updateaprobar = async  (req, res, next) => {
   console.log(req.body);
-    const {titulo, descripcion, imagen, id_estatus, id_videojuego} = req.body;
+    const {id_estatus, id_videojuego} = req.body;
 
 
     bd.query("SELECT id_videojuego, titulo, SUBSTRING(descripcion, 1, 15) as descripcion, imagen, votos, estatus FROM tbl_videojuegos INNER JOIN estatus ON estatus.id_estatus = tbl_videojuegos.id_estatus ORDER BY tbl_videojuegos.id_estatus DESC", function(err,listjuegos){
     
       bd.query("SELECT id_videojuego, titulo, descripcion, imagen, votos, estatus FROM tbl_videojuegos INNER JOIN estatus ON estatus.id_estatus = tbl_videojuegos.id_estatus ORDER BY tbl_videojuegos.id_estatus DESC", function(err,listjuegos2){
      
-        bd.query('UPDATE tbl_videojuegos SET titulo ="' + [titulo] +'", descripcion ="' + [descripcion] +'", imagen ="' + [imagen] +'", id_estatus ="' + [id_estatus] +'" WHERE id_videojuego = ?', [id_videojuego],(error, results) => {
+        bd.query('UPDATE tbl_videojuegos SET id_estatus ="' + [id_estatus] +'" WHERE id_videojuego = ?', [id_videojuego],(error, results) => {
           if(error){
             console.log(error);
             console.log("ERROR EL SQL EN LA SINTAXIS");
@@ -432,7 +432,7 @@ exports.updaterechazar = async  (req, res, next) => {
     
       bd.query("SELECT id_videojuego, titulo, descripcion, imagen, votos, estatus FROM tbl_videojuegos INNER JOIN estatus ON estatus.id_estatus = tbl_videojuegos.id_estatus ORDER BY tbl_videojuegos.id_estatus DESC", function(err,listjuegos2){
      
-        bd.query('UPDATE tbl_videojuegos SET titulo ="' + [titulo] +'", descripcion ="' + [descripcion] +'", imagen ="' + [imagen] +'", id_estatus ="' + [id_estatus] +'" WHERE id_videojuego = ?', [id_videojuego],(error, results) => {
+        bd.query('UPDATE tbl_videojuegos SET id_estatus ="' + [id_estatus] +'" WHERE id_videojuego = ?', [id_videojuego],(error, results) => {
           if(error){
             console.log(error);
             console.log("ERROR EL SQL EN LA SINTAXIS");

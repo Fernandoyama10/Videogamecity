@@ -51,20 +51,39 @@
           <li class="nav-item">
             <a class="nav-link" href="/">Inicio</a>
           </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#rankings">Ranking</a>
-          </li>
+ 
           <% if(user){ %>
-            <li class="nav-item">
-              <a class="nav-link bienvenida-text" >Bienvenido - <%= user.nombre %>..</a>
-            </li>
 
-            <li class="nav-item">
-              <a class="nav-link" href="/logout">Logout</a>
-            </li>
+            <% if(user.id_tipouser == "1"){ %>
+              <li class="nav-item">
+                <a class="nav-link" href="#rankings">Ranking</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link bienvenida-text" >Bienvenido - <%= user.nombre %>..</a>
+              </li>
+  
+              <li class="nav-item">
+                <a class="nav-link" href="../logout">Logout</a>
+              </li>
+              <% } if(user.id_tipouser == "2"){ %>
+                <li class="nav-item">
+                  <a class="nav-link" href="../dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link bienvenida-text" >Bienvenido - Admin</a>
+                </li>
+    
+                <li class="nav-item">
+                  <a class="nav-link" href="../logout">Logout</a>
+                </li>
+                <% } %>
+
+         
 
           <% } else{ %>  
-  
+            <li class="nav-item">
+              <a class="nav-link" href="#rankings">Ranking</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="../login">Iniciar Sesión</a>
             </li>
