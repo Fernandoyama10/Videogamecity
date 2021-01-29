@@ -25,18 +25,24 @@
       <body id="page-top">
         <div id="wrapper">
           <!-- Sidebar -->
-          <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
+          <ul  class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+            <a style="background: linear-gradient(to right, #4197A8 0%, #0D3A7B 100%);" class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
               <div class="sidebar-brand-icon">
-                <img src="/imagenes/logo1.png">
+                <img style="height: 30px;" src="/imagenes/logo1.png">
               </div>
              
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
-              <a class="nav-link" href="/dashboard">
+              <a class="nav-link" href="../dashboard">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Inicio Dashboard</span></a>
+            </li>
+            <hr class="sidebar-divider">
+            <li class="nav-item active">
+              <a class="nav-link" href="../">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Pagina Principal VGC</span></a>
             </li>
             <hr class="sidebar-divider">
        
@@ -45,7 +51,7 @@
           <!-- Sidebar -->
           <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
-                <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+                <nav style="background: linear-gradient(to right, #4197A8 0%, #0D3A7B 100%);" class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
                     <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
                       <i class="fa fa-bars"></i>
                     </button>
@@ -56,13 +62,12 @@
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                           aria-haspopup="true" aria-expanded="false">
                      
-                          <span class="ml-2 d-none d-lg-inline text-white small">Bienvenido</span>
+                          <span class="ml-2 d-none d-lg-inline text-white small">Bienvenido Administrador</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                           
                           <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#logoutModal">
-                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                          <a class="dropdown-item" href="../logout">
                             Logout
                           </a>
                         </div>
