@@ -437,7 +437,7 @@ exports.votarjuego = async  (req, res, next) => {
           
               }else {
                return res.render('index', {
-                    messagessucces: 'Voto registrado Correctamente', Videojuegos:listjuegos, Videojuegos2:listjuegos2, user:datos });   
+                    messagessucces: 'Voto Registrado Correctamente', Videojuegos:listjuegos, Videojuegos2:listjuegos2, user:datos });   
               }
           });
          
