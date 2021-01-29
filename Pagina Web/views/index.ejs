@@ -91,8 +91,17 @@
                                 </button>
                       </div>
                   <% } %>
-                  <br>
-           <h1 id="rankings" class="my-4 bienvenida-text">RANKING RECOMENDADOS
+                  <% if(typeof message!= "undefined" && message) { %>
+                    <div class="alert alert-danger alert-dismissible fade show" style="width: 550px;" role="alert"><strong style="padding-left: 50px;"><%= message %></strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                    </div>
+                <% } %>
+
+                  <br> 
+                  <h1  id="rankings" class="my-4 bienvenida-text">RANKING RECOMENDADOS</h1>
+
                   </div>
                   
                 </div>
@@ -121,6 +130,7 @@
                           <% if(user){ %>
                             <form style="height: 2px;" action="/auth/votarjuego" method="POST">  
                               <input type="name" class="form-control form-control-sm" style="display: none;"  value="<%=Videojuegos[videojuego].id_videojuego%>" name="id_videojuego"  autocomplete="off" required>
+                              <input type="name" class="form-control form-control-sm" style="display: none;"  value="<%=Videojuegos[videojuego].titulo%>" name="titulo"  autocomplete="off" required>
                               <button type="submit" enable=false class="btn btn-success" data-toggle="modal" data-target="#exampleModal<%=Videojuegos[videojuego].id_videojuego%>">
                                 Votar
                               </button>
@@ -130,12 +140,11 @@
                             </form>
                            
                           <% } else{ %>  
-                            <button type="button" disabled="true"  class="btn btn-success" data-toggle="modal" data-target="#exampleModal<%=Videojuegos[videojuego].id_videojuego%>">
-                              Votar
-                            </button>
+                         <div style="height: 2px;"> <a class="btn btn-success" href="../login">Votar</a>
                           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal<%=Videojuegos[videojuego].id_videojuego%>1">
                             Ver
-                          </button>
+                          </button></div>
+                           
                          <% } %>
 
                         </div>
@@ -155,7 +164,7 @@
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                       <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel"><%=Videojuegos2[videojuego2].titulo%></h5>
+                                        <h5 class="modal-title" id="exampleModalLabel"><%=Videojuegos2[videojuego2].titulo%> - Votos: <%=Videojuegos2[videojuego2].votos%> <i class="fa fa-star"style="font-size:20px;"></i></h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                         </button>
@@ -166,9 +175,8 @@
 
                                         </div>
                                         <br>
-                                        <h5 style="height: 95px;" class="card-text"><%=Videojuegos2[videojuego2].descripcion%>.</h5>
-                                        <p style="font-weight: bold; font-size:x-large;" class="card-text">Votos: <%=Videojuegos2[videojuego2].votos%> <i class="fa fa-star"style="font-size:20px;"></i></p>
-                                        
+                                        <h5 style="height: 170px;" class="card-text"><%=Videojuegos2[videojuego2].descripcion%></h5>
+                                       
                                       </div>
                                       <div class="modal-footer">
                                         <% if(user){ %>
@@ -180,14 +188,12 @@
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                             <div class="form-group">
                                               <input type="name" class="form-control form-control-sm" style="display: none;"  value="<%=Videojuegos2[videojuego2].id_videojuego%>" name="id_videojuego"  autocomplete="off" required>
+                                              <input type="name" class="form-control form-control-sm" style="display: none;"  value="<%=Videojuegos2[videojuego2].titulo%>" name="titulo"  autocomplete="off" required>
   
                                           </div>
                                           </form>
                                           <% } else{ %>  
-
-                                              <button type="submit" disabled="true" class="btn btn-success" data-toggle="modal" data-target="#exampleModal<%=Videojuegos2[videojuego2].id_videojuego%>">
-                                                Votar
-                                              </button>
+                                            <a class="btn btn-success" href="../login">Votar</a>
                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                               <div class="form-group">
                                                 <input type="name" class="form-control form-control-sm" style="display: none;"  value="<%=Videojuegos2[videojuego2].id_videojuego%>" name="id_videojuego"  autocomplete="off" required>

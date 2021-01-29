@@ -259,32 +259,85 @@ exports.guardar =  async (req, res, next) => {
         }
         if(results2.length <= 0) {
 
-            //aquí va procesar el puntaje
-          bd.query('SELECT votos FROM tbl_videojuegos where titulo = ?',[titulo] ,async (error, totalvot) => {
+  //          //validar si el usuario no tiene registrado un video juego que quiere votar
+          bd.query('SELECT id_videojuego FROM tbl_videojuegos where titulo = ?',[titulo] ,async (error, id_video1) => {
+
             if(error){
+              console.log(error);
+      
+          }else {
+
+            bd.query('SELECT id_videojuego FROM tbl_recomendaciones where id_videojuego = '+ [id_video1[0].id_videojuego] +' AND id_usuario = ?',[decoded.id] ,async (error, resultado) => {
+              if(error){
+                console.log("ERROR SENTENCIA PARA NO VOLVER A REGISTRAR EL MISMO JUEGO");
                 console.log(error);
         
-            }if(totalvot.length > 0) {
-                console.log(totalvot);
-                puntos = totalvot[0].votos + 1;
-                console.log(puntos);
-                bd.query('UPDATE tbl_videojuegos SET votos = ' + [puntos] +' WHERE titulo = ?', [titulo],(error, results) => {
-                    if(error){
-                        console.log(error);
-                        console.log("ERROR EL SQL EN LA SINTAXIS");
-                
-                    }else {
-                      console.log("ENTRA PARA ACTIVAR EL MENSAJE");
-                         return res.render('recomendar', {
-                          precaucion: 'Videojuego ya esta registrado se conto el VOTO'
-                      });
-                      
-                    }
-                });
-               
+            }if(resultado.length > 0){
+  
+              console.log("ENTRA PARA ACTIVAR EL MENSAJE DE YA HAS REGISTRADO EL VIDEO JUEGO");
+              return res.render('recomendar', {
+                message: 'Tu votación ya ha sido registrada, VOTA POR OTRO videojuego'
+               });  
+  
+            }if(resultado.length <= 0){
+
+              //se ejecuta las sentencias para guardar el voto y registrar quien lo anda votando sin haberlo votado.
+                   //aquí va procesar el puntaje
+             bd.query('SELECT votos FROM tbl_videojuegos where titulo = ?',[titulo] ,async (error, totalvot) => {
+              if(error){
+                  console.log(error);
+          
+              }if(totalvot.length > 0) {
+                  console.log(totalvot);
+                  puntos = totalvot[0].votos + 1;
+                  console.log(puntos);
+                  bd.query('UPDATE tbl_videojuegos SET votos = ' + [puntos] +' WHERE titulo = ?', [titulo],(error, results) => {
+                      if(error){
+                          console.log(error);
+                          console.log("ERROR EL SQL EN LA SINTAXIS DEL UPDATE DE VOTOS");
+                      }else {
+                        console.log(results);
+                        bd.query('SELECT id_videojuego FROM tbl_videojuegos where titulo = ?',[titulo] ,async (error, id_video) => {
+                            if(error){
+                                console.log(error);
+                        
+                            }else {
+                                console.log(id_video);
+                                bd.query('INSERT INTO tbl_recomendaciones set ?', {id_usuario:decoded.id,id_videojuego:id_video[0].id_videojuego},(error, results) => {
+                                    if(error){
+                                        console.log(error);
+                                        console.log(results);
+                                
+                                    }else {
+                                          console.log("ENTRA PARA ACTIVAR EL MENSAJE DE NUEVO PUNTO VIDEO REGISTRADO ANTES REGISTRADO, PERO NO VOTADO");
+                                          return res.render('recomendar', {
+                                         precaucion: 'Videojuego ya esta registrado se conto el VOTO'
+                                          });
+                                    }
+                                });
+                               
+                            }
+                        });   
+  
+                      }
+                  });
+                 
+              }
+             
+            });
+  
             }
-           
+  
+  
+            });
+  
+  
+            
+          }
+  
+  
           });
+
             
         }
         
@@ -398,7 +451,7 @@ exports.updaterechazar = async  (req, res, next) => {
 }
 
 exports.votarjuego = async  (req, res, next) => {
-
+  const {titulo, id_videojuego} = req.body;
 
   if( req.cookies.jwt) {
     try {
@@ -416,14 +469,90 @@ exports.votarjuego = async  (req, res, next) => {
   bd.query('SELECT id_usuario, SUBSTRING(nombre, 1, 15) as nombre, apellido, contrasena, correo, id_tipouser FROM usuario WHERE id_usuario = ?', [decoded.id], (error, datos) => {
     console.log(datos);
 
-
-    const {id_videojuego} = req.body;
     var puntos = 0;
     bd.query("SELECT SUBSTRING(descripcion, 1, 60) as descripcion, SUBSTRING(titulo, 1, 27) as titulo, id_videojuego, imagen, votos FROM tbl_videojuegos WHERE id_estatus = 1 ORDER BY votos DESC", function(err,listjuegos){
 
       bd.query("SELECT descripcion, titulo, id_videojuego, imagen, votos FROM tbl_videojuegos WHERE id_estatus = 1 ORDER BY votos DESC", function(err,listjuegos2){
 
-    bd.query('SELECT votos FROM tbl_videojuegos where id_videojuego = ?',[id_videojuego] ,async (error, totalvot) => {
+
+             //validar si el usuario no tiene registrado un video juego que quiere votar
+    /**/     bd.query('SELECT id_videojuego FROM tbl_videojuegos where titulo = ?',[titulo] ,async (error, id_video1) => {
+
+            if(error){
+              console.log(error);
+      
+          }else {
+
+            bd.query('SELECT id_videojuego FROM tbl_recomendaciones where id_videojuego = '+ [id_video1[0].id_videojuego] +' AND id_usuario = ?',[decoded.id] ,async (error, resultado) => {
+              if(error){
+                console.log("ERROR SENTENCIA PARA NO VOLVER A REGISTRAR EL MISMO JUEGO");
+                console.log(error);
+        
+            }if(resultado.length > 0){
+  
+              console.log("ENTRA PARA ACTIVAR EL MENSAJE DE YA HAS REGISTRADO EL VIDEO JUEGO");
+              return res.render('index', {
+                message: 'Tu votación ya ha sido registrada, VOTA POR OTRO videojuego', Videojuegos:listjuegos, Videojuegos2:listjuegos2, user:datos });  
+  
+            }if(resultado.length <= 0){
+
+              //se ejecuta las sentencias para guardar el voto y registrar quien lo anda votando sin haberlo votado.
+                   //aquí va procesar el puntaje
+             bd.query('SELECT votos FROM tbl_videojuegos where titulo = ?',[titulo] ,async (error, totalvot) => {
+              if(error){
+                  console.log(error);
+          
+              }if(totalvot.length > 0) {
+                  console.log(totalvot);
+                  puntos = totalvot[0].votos + 1;
+                  console.log(puntos);
+                  bd.query('UPDATE tbl_videojuegos SET votos = ' + [puntos] +' WHERE titulo = ?', [titulo],(error, results) => {
+                      if(error){
+                          console.log(error);
+                          console.log("ERROR EL SQL EN LA SINTAXIS DEL UPDATE DE VOTOS");
+                      }else {
+                        console.log(results);
+                        bd.query('SELECT id_videojuego FROM tbl_videojuegos where titulo = ?',[titulo] ,async (error, id_video) => {
+                            if(error){
+                                console.log(error);
+                        
+                            }else {
+                                console.log(id_video);
+                                bd.query('INSERT INTO tbl_recomendaciones set ?', {id_usuario:decoded.id,id_videojuego:id_video[0].id_videojuego},(error, results) => {
+                                    if(error){
+                                        console.log(error);
+                                        console.log(results);
+                                
+                                    }else {
+                                          console.log("ENTRA PARA ACTIVAR EL MENSAJE DE NUEVO PUNTO VIDEO REGISTRADO ANTES REGISTRADO, PERO NO VOTADO");
+                                          return res.render('index', {
+                                            messagessucces: 'Voto Registrado Correctamente', Videojuegos:listjuegos, Videojuegos2:listjuegos2, user:datos });
+                                    }
+                                });
+                               
+                            }
+                        });   
+  
+                      }
+                  });
+                 
+              }
+             
+            });
+  
+            }
+  
+  
+            });
+  
+  
+            
+          }
+  
+  
+          });
+
+   /*  bd.query('SELECT votos FROM tbl_videojuegos where id_videojuego = ?',[id_videojuego] ,async (error, totalvot) => {
       if(error){
           console.log(error);
   
@@ -442,10 +571,9 @@ exports.votarjuego = async  (req, res, next) => {
           });
          
       }
-  });
+  });*/
 
-
-      });
+          });
 
       });
 
