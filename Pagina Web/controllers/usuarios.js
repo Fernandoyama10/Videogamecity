@@ -536,9 +536,7 @@ exports.votarjuego = async  (req, res, next) => {
                                   
                                         });
                                   
-                                        });
-
-                                         
+                                        });       
                                     }
                                 });
                                

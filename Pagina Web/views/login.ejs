@@ -8,7 +8,8 @@
                 <div class="global-container">
                     <div class="card login-form">
                     <div class="card-body">
-                        <h3 class="card-title text-center">Iniciar Sesión</h3>
+                        <h3 style="font-weight: bold;" class="card-title text-center">Iniciar sesión</h3>
+                            <div style="height: 10px;"></div>
                         <div class="text-center"><img style="height:70px;width:70px" src="/imagenes/estrella.png" alt=""></div>
                         
                         <div class="card-text">
@@ -28,19 +29,20 @@
                                 <form action="/auth/login" method="POST">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1"></label>
-                                        <input type="email" class="form-control form-control-sm" placeholder="Ingresa tu correo" id="correo" name="correo" maxlength = "100" required >
+                                        <input type="email" class="form-control form-control-sm prueba" style="width: 482px;" placeholder="Ingresa tu correo" id="correo" name="correo" maxlength = "100" required >
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1"></label>
                                        
-                                        <input type="password" class="form-control form-control-sm" placeholder="Contraseña" id="contrasena" name="contrasena" minlength="5" maxlength = "40"  required >
+                                        <input type="password" class="form-control form-control-smprueba" style="width: 482px;" placeholder="Contraseña" id="contrasena" name="contrasena" minlength="5" maxlength = "40"  required >
                                     </div>
                                     <br>
                                     <br>
                                     <button type="submit" class="btn btn-primary btn-block">Login</button>
                                 </form>
-                                    <br>
-                                    <br>
+                                <br>
+                                <br>
+                                <div class="linea-formulario"></div>
                                     <div class="sign-up">
                                         ¿No tienes cuenta? <a href="/registro">Registrate</a>
                                     </div>
