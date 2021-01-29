@@ -17,11 +17,14 @@
     $(document).ready(function(){
         $('input.typeahead').typeahead({
             name: 'countries',
-            remote: 'http://localhost:3000/searchtool?key=%QUERY',
+            remote: 'http://videogamecity.us-3.evennode.com/searchtool?key=%QUERY',
             limit: 10,
         });
     });
     </script>
+    <link href="/stylesheets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script src="/stylesheets/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/stylesheets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 </head>
 
