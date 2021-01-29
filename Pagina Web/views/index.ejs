@@ -116,14 +116,22 @@
           
 
                       <div class="col-lg-3 col-md-2 col-sm-4 portfolio-item " style="padding-top: 45px;padding-bottom: 25px;"     >
-                        <% if(Videojuegos[videojuego].votos > "50"){ %>
+                        <% if(Videojuegos[videojuego].votos > "100" && Videojuegos[videojuego].votos < "500"){ %>
                           <ul class="list-group" >
-                            <li class="list-group-item list-group-item-danger"><i class="fa fa-star"style="font-size:20px;"></i>   Votos: <%=Videojuegos[videojuego].votos%> </li>
+                            <li style="color:rgb(184, 52, 0);background-color:#faab7d;font-weight: bold;" class="list-group-item list-group-item-danger"><i class="fa fa-star"style="font-size:20px;"></i>   Votos: <%=Videojuegos[videojuego].votos%> </li>
                           </ul>
-                          <% } else{ %>  
-                            <ul class="list-group" >
-                              <li class="list-group-item list-group-item-warning"><i class="fa fa-star"style="font-size:20px;"></i>   Votos: <%=Videojuegos[videojuego].votos%> </li>
-                            </ul>
+                          <% } else if(Videojuegos[videojuego].votos > "500" && Videojuegos[videojuego].votos < "1000"){ %>  
+                            <ul class="list-group" > 
+                              <li style="color:#5a5a5a;background-color:#a0a0a0;font-weight: bold;" class="list-group-item list-group-item-warning"><i class="fa fa-star"style="font-size:20px;"></i>   Votos: <%=Videojuegos[videojuego].votos%> </li>
+                            </ul> 
+                            <% } else if(Videojuegos[videojuego].votos > "1000" && Videojuegos[videojuego].votos < "2000"){ %>
+                              <ul class="list-group" >
+                                <li style="color:rgb(122, 110, 2);background-color:#efb810;font-weight: bold;" class="list-group-item list-group-item-danger"><i class="fa fa-star"style="font-size:20px;"></i>   Votos: <%=Videojuegos[videojuego].votos%> </li>
+                              </ul>
+                              <% } else if(Videojuegos[videojuego].votos < "100"){ %>  
+                                <ul class="list-group" >
+                                  <li style="font-weight: bold;" class="list-group-item list-group-item-warning"><i class="fa fa-star"style="font-size:20px;"></i>   Votos: <%=Videojuegos[videojuego].votos%> </li>
+                                </ul>
                             <% } %>
                        
                       <div class="card h-100 sombra-caja-lista">
@@ -131,8 +139,8 @@
                         <a ><center><img class="card-img-top imagen-lista" src="<%=Videojuegos[videojuego].imagen%>" alt=""></center></a>
                         <div class="card-body">
                          
-                          <h4 style="font-weight:500; height: 50px;"  class="card-title">
-                              <a href="#"><%=Videojuegos[videojuego].titulo%>...</a>
+                          <h4 style="font-weight:500; height: 50px;    color: rgb(17, 138, 236)"  class="card-title">
+                              <a><%=Videojuegos[videojuego].titulo%>...</a>
                           </h4> 
                           <p style="height: 70px;" class="card-text"><%=Videojuegos[videojuego].descripcion%>...</p>
                           <br>

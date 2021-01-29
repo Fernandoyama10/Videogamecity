@@ -7,11 +7,19 @@ const authController = require('../controllers/usuarios');
 router.get('/', authController.isLoggedIn, async function(req, res, next) {
   //hacemos el select con la variable importada de conexión 
 
-  const { typeahead } = req.body;
+  
 
-      res.render('successful', { title: 'VideoGamesCity', user:req.user });
+      res.render('successful', { title: '¡Gracias por tu Voto!', mensaje: '¡Gracias por tu Voto!' });
 
 
   }); 
-
+  router.get('/error', authController.isLoggedIn, async function(req, res, next) {
+    //hacemos el select con la variable importada de conexión 
+  
+    
+  
+        res.render('successful', { title: 'Error', mensaje: 'Lo siento, ya haz votado por este videojuego. Vota por otro.' });
+  
+  
+    }); 
   module.exports = router;
