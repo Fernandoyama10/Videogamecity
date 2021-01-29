@@ -254,7 +254,7 @@ exports.guardar =  async (req, res, next) => {
 
           console.log("ENTRA PARA ACTIVAR EL MENSAJE DE VIDEO JUEGO REGISTRADO NO APROBADO");
           return res.render('recomendar', {
-            message: 'Videojuego ya esta registrado, pero NO SE HA APROVADO'
+            message: 'Videojuego ya esta registrado, pero NO SE HA APROBADO'
            });  
         }
         if(results2.length <= 0) {
@@ -423,8 +423,6 @@ exports.votarjuego = async  (req, res, next) => {
 
       bd.query("SELECT descripcion, titulo, id_videojuego, imagen, votos FROM tbl_videojuegos WHERE id_estatus = 1 ORDER BY votos DESC", function(err,listjuegos2){
 
-       
-          
     bd.query('SELECT votos FROM tbl_videojuegos where id_videojuego = ?',[id_videojuego] ,async (error, totalvot) => {
       if(error){
           console.log(error);
@@ -436,12 +434,10 @@ exports.votarjuego = async  (req, res, next) => {
           bd.query('UPDATE tbl_videojuegos SET votos = ' + [puntos] +' WHERE id_videojuego = ?', [id_videojuego],(error, results) => {
               if(error){
                   console.log(error);
-                  console.log("------ERROR EL SQL EN LA SINTAXIS--------");
           
               }else {
-                console.log("------------ENTRA PARA ACTIVAR EL MENSAJE de exito---------------");
                return res.render('index', {
-                    messagessucces: 'Voto registrado', Videojuegos:listjuegos, Videojuegos2:listjuegos2, user:datos });   
+                    messagessucces: 'Voto registrado Correctamente', Videojuegos:listjuegos, Videojuegos2:listjuegos2, user:datos });   
               }
           });
          
