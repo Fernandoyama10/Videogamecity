@@ -524,9 +524,21 @@ exports.votarjuego = async  (req, res, next) => {
                                         console.log(results);
                                 
                                     }else {
+
+                                      bd.query("SELECT SUBSTRING(descripcion, 1, 60) as descripcion, SUBSTRING(titulo, 1, 27) as titulo, id_videojuego, imagen, votos FROM tbl_videojuegos WHERE id_estatus = 1 ORDER BY votos DESC", function(err,listjuegos){
+
+                                        bd.query("SELECT descripcion, titulo, id_videojuego, imagen, votos FROM tbl_videojuegos WHERE id_estatus = 1 ORDER BY votos DESC", function(err,listjuegos2){
+                                    
+                                  
                                           console.log("ENTRA PARA ACTIVAR EL MENSAJE DE NUEVO PUNTO VIDEO REGISTRADO ANTES REGISTRADO, PERO NO VOTADO");
                                           return res.render('index', {
                                             messagessucces: 'Voto Registrado Correctamente', Videojuegos:listjuegos, Videojuegos2:listjuegos2, user:datos });
+                                  
+                                        });
+                                  
+                                        });
+
+                                         
                                     }
                                 });
                                
