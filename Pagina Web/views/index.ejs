@@ -133,9 +133,9 @@
                             <button type="button" disabled="true"  class="btn btn-success" data-toggle="modal" data-target="#exampleModal<%=Videojuegos[videojuego].id_videojuego%>">
                               Votar
                             </button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal<%=Videojuegos[videojuego].id_videojuego%>">
-                              Ver
-                            </button>
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal<%=Videojuegos[videojuego].id_videojuego%>1">
+                            Ver
+                          </button>
                          <% } %>
 
                         </div>
@@ -171,17 +171,29 @@
                                         
                                       </div>
                                       <div class="modal-footer">
-                                       <form action="/auth/votarjuego" method="POST">
-                                          <button type="submit" enable=false class="btn btn-success" data-toggle="modal" data-target="#exampleModal<%=Videojuegos2[videojuego2].id_videojuego%>">
-                                            Votar
-                                          </button>
-                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                          <div class="form-group">
-                                            <input type="name" class="form-control form-control-sm" style="display: none;"  value="<%=Videojuegos2[videojuego2].id_videojuego%>" name="id_videojuego"  autocomplete="off" required>
+                                        <% if(user){ %>
 
-                                        </div>
-                                        </form>
-                                      
+                                          <form action="/auth/votarjuego" method="POST">
+                                            <button type="submit" enable=false class="btn btn-success" data-toggle="modal" data-target="#exampleModal<%=Videojuegos2[videojuego2].id_videojuego%>">
+                                              Votar
+                                            </button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                            <div class="form-group">
+                                              <input type="name" class="form-control form-control-sm" style="display: none;"  value="<%=Videojuegos2[videojuego2].id_videojuego%>" name="id_videojuego"  autocomplete="off" required>
+  
+                                          </div>
+                                          </form>
+                                          <% } else{ %>  
+
+                                              <button type="submit" disabled="true" class="btn btn-success" data-toggle="modal" data-target="#exampleModal<%=Videojuegos2[videojuego2].id_videojuego%>">
+                                                Votar
+                                              </button>
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                              <div class="form-group">
+                                                <input type="name" class="form-control form-control-sm" style="display: none;"  value="<%=Videojuegos2[videojuego2].id_videojuego%>" name="id_videojuego"  autocomplete="off" required>
+                                            </div>
+            
+                                            <% } %>                                      
                                       </div>
                                     </div>
                                   </div>
