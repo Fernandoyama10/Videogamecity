@@ -276,7 +276,7 @@ exports.guardar =  async (req, res, next) => {
   
               console.log("ENTRA PARA ACTIVAR EL MENSAJE DE YA HAS REGISTRADO EL VIDEO JUEGO");
               return res.render('recomendar', {
-                message: '!Lo siento, ya has votodo por ese video juego, Vota por otro', 
+                message: '¡Lo siento!, ya has votado por este videojuego. Vota por otro', 
                });  
   
             }if(resultado.length <= 0){
